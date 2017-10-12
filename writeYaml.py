@@ -15,3 +15,7 @@ if __name__ == "__main__":
     filepath = "/Users/michaelbernard/Documents/GitHub/ChemKED-database/2-butanol/2-butanol LPST Stranic xO2_0.03_phi_1.0.yaml"
     data = yaml_loader(filepath)
     print(data)
+
+    items = data.get('file-author')
+    for subitem in items:
+        print(subitem.value)
