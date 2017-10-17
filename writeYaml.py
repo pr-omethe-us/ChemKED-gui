@@ -1,21 +1,25 @@
 import yaml
 
-def yaml_loader(filepath):
-    """Loads a yaml file"""
-    with open(filepath) as file_descriptor:
-        data = yaml.load(file_descriptor)
-    return data
+print("File Author Information")
+author_name = input("Author Name: ")
+orcid = input("ORCID: ")
 
-def yaml_dump(filepath, data):
-    """Dumps data to a yaml file"""
-    with open(filepath, "w+") as file_descriptor:
-        yaml.dump(data, file_descriptor)
+file_version = input("File Version: ")
+chemked_version = input("ChemKED Version: ")
 
-if __name__ == "__main__":
-    filepath = "/Users/michaelbernard/Documents/GitHub/ChemKED-database/2-butanol/2-butanol LPST Stranic xO2_0.03_phi_1.0.yaml"
-    data = yaml_loader(filepath)
-    print(data)
+print("Reference Information")
+doi = input("DOI: ")
+authors = input("Authors (comma-separated): ")
+journal = input("Journal: ")
+year = input("Year: ")
+volume = input("Volume: ")
+pages = input("Pages: ")
+detail = input("Detail: ")
 
-    items = data.get('file-author')
-    for subitem in items:
-        print(subitem.value)
+print("Experiment Information")
+experiment_type = input("Experiment Type: ")
+print("Apparatus Information")
+apparatus = input("Apparatus: ")
+kind = input("Kind: ")
+institution = input("Institution: ")
+facility = input("Facility: ")
