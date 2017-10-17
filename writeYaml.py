@@ -1,5 +1,40 @@
 import yaml
 
+def represent_mapping(self, tag, mapping, flow_style=None):
+    # This fix doesn't work.
+    # Potential solutions:
+    # -Remove line from yaml module and include
+    #  modified yaml module in the gui module.
+    # -Write the data line-by-line? (Seems inefficient)
+    # -Somehow have yaml call this modified function
+    #  instead of the one built into the yaml module.
+    """This is a modified pyyaml function.
+    The mapping.sort() line has been commented out
+    so as to preserve the order of items as they are
+    written to the yaml file."""
+    value = []
+    node = MappingNode(tag, value, flow_style=flow_style)
+    if self.alias_key is not None:
+        self.represented_objects[self.alias_key] = node
+    best_style = True
+    if hasattr(mapping, 'items'):
+        mapping = mapping.items()
+        # mapping.sort()
+    for item_key, item_value in mapping:
+        node_key = self.represent_data(item_key)
+        node_value = self.represent_data(item_value)
+        if not (isinstance(node_key, ScalarNode) and not node_key.style):
+            best_style = False
+        if not (isinstance(node_value, ScalarNode) and not node_value.style):
+            best_style = False
+        value.append((node_key, node_value))
+    if flow_style is None:
+        if self.default_flow_style is not None:
+            node.flow_style = self.default_flow_style
+        else:
+            node.flow_style = best_style
+    return node
+
 
 def get_author_info():
     print("File Author Information")
@@ -86,6 +121,7 @@ def main():
 
     with open('data.yaml', 'w') as outfile:
         yaml.dump(data, outfile, default_flow_style=False)
+
 
 if __name__ == "__main__":
     main()
