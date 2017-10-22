@@ -1,0 +1,8 @@
+file-author:
+file-version:
+chemked-version:
+reference:
+experiment-type:
+apparatus:
+common-properties:
+datapoints:

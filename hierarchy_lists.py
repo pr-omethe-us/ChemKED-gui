@@ -1,12 +1,12 @@
 hierarchy_0 = [
-    'file-author',
-    'file-version',
-    'chemked-version',
-    'reference',
-    'experiment-type',
-    'apparatus',
-    'common-properties',
-    'datapoints'
+    'file-author:',
+    'file-version:',
+    'chemked-version:',
+    'reference:',
+    'experiment-type:',
+    'apparatus:',
+    'common-properties:',
+    'datapoints:'
 ]
 
 hierarchy_file_author = [
@@ -33,7 +33,4 @@ hierarchy_apparatus = [
 hierarchy_common_properties = [
     'composition',
     'ignition-type'
-]
-
-hierarchy_datapoints = [
 ]
