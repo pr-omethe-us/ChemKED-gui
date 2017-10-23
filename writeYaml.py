@@ -1,4 +1,3 @@
-from hierarchy_lists import *
 # import sys
 
 
