@@ -13,6 +13,18 @@ class window(QMainWindow):
         self.setWindowTitle("It\'s Just a Test")
         # setWindowIcon does nothing on OSX. Works for Windows.
         # self.setWindowIcon(QIcon('pic.png'))
+
+        extractAction = QAction('&Close GUI', self)
+        extractAction.setShortcut('Ctrl+Q')
+        extractAction.setStatusTip('Close the window')
+        extractAction.triggered.connect(self.close_application)
+
+        self.statusBar()
+
+        mainMenu = self.menuBar()
+        fileMenu = mainMenu.addMenu('&File')
+        fileMenu.addAction(extractAction)
+
         self.home()
 
     def home(self):
@@ -20,7 +32,7 @@ class window(QMainWindow):
         btn.clicked.connect(self.close_application)
 
         btn.resize(btn.sizeHint())
-        btn.move(0, 0)
+        btn.move(0, 100)
         self.show()
 
     def close_application(self):
