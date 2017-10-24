@@ -1,9 +1,9 @@
 import sys
 from PyQt5.QtCore import QCoreApplication
-from PyQt5.QtGui import *
+# from PyQt5.QtGui import *
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QAction
-from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QPushButton
+from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QPushButton, QAction
+from PyQt5.uic.properties import QtGui
 
 class window(QMainWindow):
 
@@ -25,14 +25,17 @@ class window(QMainWindow):
         fileMenu = mainMenu.addMenu('&File')
         fileMenu.addAction(extractAction)
 
+        self.toolBar = self.addToolBar('Extraction')
+        self.toolBar.addAction(extractAction)
+
         self.home()
 
     def home(self):
-        btn = QPushButton('quit', self)
+        btn = QPushButton('Quit', self)
         btn.clicked.connect(self.close_application)
-
         btn.resize(btn.sizeHint())
         btn.move(0, 100)
+
         self.show()
 
     def close_application(self):
