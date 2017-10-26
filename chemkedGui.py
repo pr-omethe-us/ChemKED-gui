@@ -1,9 +1,10 @@
 import sys
-from PyQt5.QtCore import QCoreApplication
+from PyQt5.QtCore import QCoreApplication, Qt
 # from PyQt5.QtGui import *
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QPushButton, QAction, QMessageBox
 from PyQt5.uic.properties import QtGui
+from PyQt5.QtWidgets import QCheckBox
 
 class window(QMainWindow):
 
@@ -36,7 +37,19 @@ class window(QMainWindow):
         btn.resize(btn.sizeHint())
         btn.move(0, 100)
 
+        checkBox = QCheckBox('Enlarge Window', self)
+        # checkBox.toggle() # uncomment for default to be checked
+        checkBox.move(0, 50)
+        checkBox.stateChanged.connect(self.enlarge_window)
+
         self.show()
+
+    def enlarge_window(self, state):
+        if state == Qt.Checked:
+            self.setGeometry(50, 50, 1000, 600)
+        else:
+            self.setGeometry(50, 50, 500, 300)
+
 
     def close_application(self):
 
