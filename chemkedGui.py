@@ -4,7 +4,8 @@ from PyQt5.QtCore import QCoreApplication, Qt
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QPushButton, QAction, QMessageBox
 from PyQt5.uic.properties import QtGui
-from PyQt5.QtWidgets import QCheckBox
+from PyQt5.QtWidgets import QCheckBox, QProgressBar
+from time import sleep
 
 class window(QMainWindow):
 
@@ -38,11 +39,29 @@ class window(QMainWindow):
         btn.move(0, 100)
 
         checkBox = QCheckBox('Enlarge Window', self)
-        # checkBox.toggle() # uncomment for default to be checked
+        # uncomment for default to be checked (broken, though)
+        # checkBox.toggle()
         checkBox.move(0, 50)
         checkBox.stateChanged.connect(self.enlarge_window)
 
+        self.progress = QProgressBar(self)
+        self.progress.setGeometry(200, 80, 250, 20)
+
+        self.btn = QPushButton('Download', self)
+        self.btn.move(200, 120)
+        self.btn.clicked.connect(self.download)
+
         self.show()
+
+    def download(self):
+        self.completed = 0
+
+        # The conditions under which the progress
+        # bar fills can be modified
+        while self.completed < 100:
+            self.completed += 1
+
+            self.progress.setValue(self.completed)
 
     def enlarge_window(self, state):
         if state == Qt.Checked:
