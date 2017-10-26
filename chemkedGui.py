@@ -2,7 +2,7 @@ import sys
 from PyQt5.QtCore import QCoreApplication
 # from PyQt5.QtGui import *
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QPushButton, QAction
+from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QPushButton, QAction, QMessageBox
 from PyQt5.uic.properties import QtGui
 
 class window(QMainWindow):
@@ -39,8 +39,18 @@ class window(QMainWindow):
         self.show()
 
     def close_application(self):
-        print("Passed Test")
-        sys.exit()
+
+        choice  = QMessageBox.question(self, 'Message',
+                                       "Close without saving?",
+                                       QMessageBox.Yes |
+                                       QMessageBox.No,
+                                       QMessageBox.No)
+
+        if choice == QMessageBox.Yes:
+            print("Closing GUI")
+            sys.exit()
+        else:
+            pass
 
 
 def main():
