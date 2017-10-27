@@ -1,11 +1,11 @@
 import sys
 from PyQt5.QtCore import QCoreApplication, Qt
-# from PyQt5.QtGui import *
-from PyQt5.QtGui import QIcon
+from PyQt5.QtGui import QIcon, QColor
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QPushButton, QAction, QMessageBox
-from PyQt5.uic.properties import QtGui
-from PyQt5.QtWidgets import QCheckBox, QProgressBar
-from time import sleep
+from PyQt5.QtWidgets import QCalendarWidget, QFontDialog
+from PyQt5.QtWidgets import QCheckBox, QProgressBar, QComboBox, QLabel, QStyleFactory
+from PyQt5.QtWidgets import QColorDialog, QTextEdit
+
 
 class window(QMainWindow):
 
@@ -27,10 +27,27 @@ class window(QMainWindow):
         fileMenu = mainMenu.addMenu('&File')
         fileMenu.addAction(extractAction)
 
+        extractAction = QAction(QIcon('pic.png'), 'Leave', self)
+        extractAction.triggered.connect(self.close_application)
         self.toolBar = self.addToolBar('Extraction')
         self.toolBar.addAction(extractAction)
 
+        fontChoice = QAction('Font', self)
+        fontChoice.triggered.connect(self.font_choice)
+        self.toolBar = self.addToolBar('Font')
+        self.toolBar.addAction(fontChoice)
+
         self.home()
+
+    def color_picker(self):
+        color = QColorDialog.getColor()
+        self.styleChoice.setStyleSheet('QWidget{background-color: %s}' % color.name())
+
+    def font_choice(self):
+        font, valid = QFontDialog.getFont()
+        if valid:
+            self.styleChoice.setFont(font)
+
 
     def home(self):
         btn = QPushButton('Quit', self)
@@ -51,7 +68,24 @@ class window(QMainWindow):
         self.btn.move(200, 120)
         self.btn.clicked.connect(self.download)
 
+        self.styleChoice = QLabel('Windows', self)
+        comboBox = QComboBox(self)
+        comboBox.addItem('motif')
+        comboBox.addItem('Windows')
+        comboBox.addItem('cde')
+        comboBox.addItem('Plastique')
+        comboBox.addItem('Cleanlooks')
+        comboBox.addItem('windowsvista')
+
+        comboBox.move(25, 250)
+        self.styleChoice.move(25, 150)
+        comboBox.activated[str].connect(self.style_choice)
+
         self.show()
+
+    def style_choice(self):
+        self.styleChoice.setText(text)
+        QApplication.setStyle(QStyleFactory.create(text))
 
     def download(self):
         self.completed = 0
@@ -59,8 +93,7 @@ class window(QMainWindow):
         # The conditions under which the progress
         # bar fills can be modified
         while self.completed < 100:
-            self.completed += 1
-
+            self.completed += 0.0001
             self.progress.setValue(self.completed)
 
     def enlarge_window(self, state):
