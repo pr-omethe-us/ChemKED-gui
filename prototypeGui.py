@@ -1,7 +1,7 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow
 from PyQt5.QtWidgets import QPushButton, QMessageBox, QAction
-from PyQt5.QtWidgets import QToolTip, QDesktopWidget, qApp
+from PyQt5.QtWidgets import QToolTip, QDesktopWidget, QSpinBox
 from PyQt5.QtWidgets import QHBoxLayout, QVBoxLayout, QTabWidget
 from PyQt5.QtWidgets import QLabel, QLineEdit, QFormLayout, QGroupBox
 from PyQt5.QtGui import QFont, QIcon
@@ -125,17 +125,42 @@ class Table(QWidget):
         self.tab1.setLayout(self.tab1.vbox)
 
         # Tab 2 contents
+        # This tab could probably be optimized a bit further
+        experiment_type = QLineEdit('ignition delay')
+        apparatus_kind = QLineEdit()
+        institution = QLineEdit()
+        facility = QLineEdit()
+
+        composition_kind = QLineEdit()
+        species = []
+        num_species = QSpinBox()
+
+        self.tab2.add_species_button = QPushButton('Add...')
+        self.tab2.add_species_button.resize(self.tab2.add_species_button.sizeHint())
+        self.tab2.add_species_button.clicked.connect(self.addSpecies)
+
+        self.tab2.species_row_header = QHBoxLayout()
+        self.tab2.species_row_header.addWidget(QLabel('    Species'))
+        self.tab2.species_row_header.addWidget(num_species)
+        self.tab2.species_row_header.addWidget(self.tab2.add_species_button)
+
         self.tab2.vbox = QVBoxLayout()
         self.tab2.formGroupBox = QGroupBox()
         self.tab2.formLayout = QFormLayout()
-        self.tab2.formLayout.addRow(QLabel('Experiment Type'), QLineEdit('Ignition Delay'))
-        self.tab2.formLayout.addRow(QLabel(''))
+
+        self.tab2.formLayout.addRow(QLabel('Experiment Type'), experiment_type)
         self.tab2.formLayout.addRow(QLabel('Apparatus Information'))
-        self.tab2.formLayout.addRow(QLabel('Kind'), QLineEdit())
-        self.tab2.formLayout.addRow(QLabel('Institution'), QLineEdit())
-        self.tab2.formLayout.addRow(QLabel('Facility'), QLineEdit())
+        self.tab2.formLayout.addRow(QLabel('Kind'), apparatus_kind)
+        self.tab2.formLayout.addRow(QLabel('Institution'), institution)
+        self.tab2.formLayout.addRow(QLabel('Facility'), facility)
+
         self.tab2.formLayout.addRow(QLabel(''))
         self.tab2.formLayout.addRow(QLabel('Common Properties'))
+        self.tab2.formLayout.addRow(QLabel('    Composition Information'))
+        self.tab2.formLayout.addRow(QLabel('Kind'), composition_kind)
+        self.tab2.formLayout.addRow(self.tab2.species_row_header)
+
+
         self.tab2.formGroupBox.setLayout(self.tab2.formLayout)
         self.tab2.vbox.addWidget(self.tab2.formGroupBox)
         self.tab2.setLayout(self.tab2.vbox)
@@ -157,6 +182,10 @@ class Table(QWidget):
         self.setLayout(self.layout)
 
         self.export_button.clicked.connect(self.export)
+
+
+    def addSpecies(self):
+        self.tab2.formLayout.addRow(QLabel('Test'))
 
 
     def export(self):
@@ -188,13 +217,6 @@ class Table(QWidget):
                     f.write(reference_labels[i] +
                             self.tab1.reference_values[i].text() +
                             '\n')
-
-
-
-    def on_click(self):
-        print("\n")
-        for currentQTableWidgetItem in self.tableWidget.selectedItems():
-            print(currentQTableWidgetItem.row(), currentQTableWidgetItem.column(), currentQTableWidgetItem.text())
 
 
 def main():
