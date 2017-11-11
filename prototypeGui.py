@@ -5,9 +5,11 @@ from PyQt5.QtWidgets import QToolTip, QDesktopWidget, qApp
 from PyQt5.QtWidgets import QHBoxLayout, QVBoxLayout, QTabWidget
 from PyQt5.QtWidgets import QLabel, QLineEdit, QFormLayout, QGroupBox
 from PyQt5.QtGui import QFont, QIcon
-from PyQt5.QtCore import pyqtSlot
 
 class Window(QMainWindow):
+    """
+    Controls main window handling.
+    """
     def __init__(self):
         # Inherits class methods from QMainWindow
         super(Window, self).__init__()
@@ -20,6 +22,8 @@ class Window(QMainWindow):
         self.setGeometry(self.left, self.top, self.width, self.height)
 
         self.vbox = QVBoxLayout()
+
+        # The Table Class handles the majority of the work.
         self.table_widget = Table(self)
         self.vbox.addWidget(self.table_widget)
         self.setCentralWidget(self.table_widget)
@@ -52,20 +56,6 @@ class Window(QMainWindow):
         #  top left corner of the rectangle.
         self.move(qr.topLeft())
 
-    # def close_application(self):
-    #
-    #     choice = QMessageBox.question(self, 'Message',
-    #                                    "Are you sure to quit?",
-    #                                    QMessageBox.Yes |
-    #                                    QMessageBox.No,
-    #                                    QMessageBox.No)
-    #
-    #     if choice == QMessageBox.Yes:
-    #         print("Closing GUI")
-    #         sys.exit()
-    #     else:
-    #         pass
-
 
     def closeEvent(self, event):
         reply = QMessageBox.question(self, 'Message',
@@ -80,15 +70,11 @@ class Window(QMainWindow):
 
 class Table(QWidget):
     """
-    This class creates a tab widget, which contains tabs.
-    The tab widget is placed onto the object called by the
-    Window class.
-
-    Bugs:
-    1. QLayout: Attempting to add QLayout "" to Table "", which already has a layout
-        Not sure what's causing this, doesn't seem to affect functionality.
+    This class handles creating tabs and exporting to YAML.
+    In each tab is file information.
+    When the Export button is clicked, the information
+    entered is exported to a YAML file.
     """
-
 
     def __init__(self, parent):
         super(QWidget, self).__init__(parent)
@@ -104,8 +90,9 @@ class Table(QWidget):
         # Tab 1 contents
         author_name = QLineEdit()
         author_orcid = QLineEdit()
-        file_version = QLineEdit()
-        chemked_version = QLineEdit()
+        file_version = QLineEdit('0')
+        chemked_version = QLineEdit('0.0.1')
+
         doi = QLineEdit()
         ref_authors = QLineEdit()
         journal = QLineEdit()
@@ -173,13 +160,35 @@ class Table(QWidget):
 
 
     def export(self):
-        values = []
-        for item in self.tab1.metadata_values:
-            item = item.text()
-            values.append(item)
+        """
+        Exports to a YAML document.
+        This can DEFINITELY be optimized further.
+        ...but it works.
+        """
+        metadata_labels = ['    name: ', '    ORCID: ',
+                  'file-version: ', 'chemked-version: ']
+        reference_labels = ['    doi: ', '    authors: ', '    journal: ', '    year: ',
+                            '    volume: ', '    pages: ', '    detail: ']
+
         with open('testing.txt', 'w') as f:
-            for item in values:
-                f.write(item + '\n')
+            f.write('---\nfile-author:\n')
+            for i in range(len(metadata_labels)):
+                f.write(metadata_labels[i] +
+                        self.tab1.metadata_values[i].text() +
+                        '\n')
+            f.write('reference:\n')
+            for i in range(len(reference_labels)):
+                if i == 1:
+                    auths = self.tab1.reference_values[1].text().split(', ')
+                    f.write(reference_labels[i] + '\n')
+                    for j in range(len(auths)):
+                        f.write('        - name: ' +
+                                auths[j] + '\n')
+                else:
+                    f.write(reference_labels[i] +
+                            self.tab1.reference_values[i].text() +
+                            '\n')
+
 
 
     def on_click(self):
