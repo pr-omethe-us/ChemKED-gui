@@ -2,8 +2,10 @@ import sys
 from PyQt5.QtWidgets import (QApplication, QWidget, QMainWindow,
         QPushButton, QMessageBox, QAction, QToolTip, QDesktopWidget, QSpinBox,
         QHBoxLayout, QVBoxLayout, QTabWidget, QSplashScreen,
-        QLabel, QLineEdit, QFormLayout, QGroupBox)
-from PyQt5.QtGui import QFont, QIcon
+        QLabel, QLineEdit, QFormLayout, QGroupBox, QScrollArea,
+        QScrollBar)
+from PyQt5.QtGui import *
+# from PyQt5.QtCore import *
 
 
 class Window(QMainWindow):
@@ -127,50 +129,67 @@ class Table(QWidget):
         self.tab1.setLayout(self.tab1.vbox)
 
         # Tab 2 contents
-        # This tab could probably be optimized a bit further
-        experiment_type = QLineEdit('ignition delay')
-        apparatus_kind = QLineEdit()
-        institution = QLineEdit()
-        facility = QLineEdit()
+        self.tab2.add_button = QPushButton('Add...')
+        self.tab2.add_button.clicked.connect(self.addSpecies)
 
-        composition_kind = QLineEdit()
         self.tab2.num_species = 0
+
+        self.tab2.experiment_type = QLineEdit('ignition delay')
+        self.tab2.apparatus_kind = QLineEdit()
+        self.tab2.apparatus_institution = QLineEdit()
+        self.tab2.apparatus_facility = QLineEdit()
+        self.tab2.comp_kind = QLineEdit()
+        self.tab2.ignition_target = QLineEdit()
+        self.tab2.ignition_type = QLineEdit()
 
         self.tab2.species = []
         self.tab2.species_names = []
         self.tab2.InChIs = []
         self.tab2.amounts = []
 
-        self.tab2.add_species_button = QPushButton('Add...')
-        self.tab2.add_species_button.resize(self.tab2.add_species_button.sizeHint())
-        self.tab2.add_species_button.clicked.connect(self.addSpecies)
+        # Seems to either be a bug or tricky code with making scroll bars work
+        # self.tab2.scroll_area = QScrollArea()
+        # self.tab2.scroll_area.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+        # self.tab2.scroll_area.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        # self.tab2.scroll_area.setWidgetResizable(False)
 
-        self.tab2.species_row_header = QHBoxLayout()
-        self.tab2.species_row_header.addWidget(QLabel('    Species'))
-        self.tab2.species_row_header.addWidget(self.tab2.add_species_button)
+        self.tab2.hbox = QHBoxLayout()
+        self.tab2.formGroupBox_1 = QGroupBox()
+        self.tab2.formGroupBox_2 = QGroupBox()
+        self.tab2.formLayout_1 = QFormLayout()
+        self.tab2.formLayout_2 = QFormLayout()
 
-        self.tab2.vbox = QVBoxLayout()
-        self.tab2.formGroupBox = QGroupBox()
-        self.tab2.formLayout = QFormLayout()
+        self.tab2.formLayout_1.addRow(QLabel('Composition Information'))
+        self.tab2.formLayout_1.addRow(QLabel('Kind'), self.tab2.comp_kind)
+        self.tab2.formLayout_1.addRow(QLabel(''))
+        self.tab2.formLayout_1_species_header = QHBoxLayout()
+        self.tab2.formLayout_1_species_header.addWidget(QLabel('Species Information'))
+        self.tab2.formLayout_1_species_header.addWidget(self.tab2.add_button)
+        self.tab2.formLayout_1.addRow(self.tab2.formLayout_1_species_header)
 
-        self.tab2.formLayout.addRow(QLabel('Experiment Type'), experiment_type)
-        self.tab2.formLayout.addRow(QLabel('Apparatus Information'))
-        self.tab2.formLayout.addRow(QLabel('Kind'), apparatus_kind)
-        self.tab2.formLayout.addRow(QLabel('Institution'), institution)
-        self.tab2.formLayout.addRow(QLabel('Facility'), facility)
+        self.tab2.formLayout_2.addRow(QLabel('Experiment Type'), self.tab2.experiment_type)
+        self.tab2.formLayout_2.addRow(QLabel(''))
+        self.tab2.formLayout_2.addRow(QLabel('Apparatus Information'))
+        self.tab2.formLayout_2.addRow(QLabel('Kind'), self.tab2.apparatus_kind)
+        self.tab2.formLayout_2.addRow(QLabel('Institution'), self.tab2.apparatus_institution)
+        self.tab2.formLayout_2.addRow(QLabel('Facility'), self.tab2.apparatus_facility)
+        self.tab2.formLayout_2.addRow(QLabel(''))
+        self.tab2.formLayout_2.addRow(QLabel('Ignition Information'))
+        self.tab2.formLayout_2.addRow(QLabel('Target'), self.tab2.ignition_target)
+        self.tab2.formLayout_2.addRow(QLabel('Type'), self.tab2.ignition_type)
 
-        self.tab2.formLayout.addRow(QLabel(''))
-        self.tab2.formLayout.addRow(QLabel('Common Properties'))
-        self.tab2.formLayout.addRow(QLabel('    Composition Information'))
-        self.tab2.formLayout.addRow(QLabel('Kind'), composition_kind)
-        self.tab2.formLayout.addRow(self.tab2.species_row_header)
+        # self.tab2.scroll_area.setWidget(self.tab2.formLayout_1)
+        self.tab2.formGroupBox_1.setLayout(self.tab2.formLayout_1)
+        self.tab2.formGroupBox_2.setLayout(self.tab2.formLayout_2)
 
-        self.tab2.formGroupBox.setLayout(self.tab2.formLayout)
-        self.tab2.vbox.addWidget(self.tab2.formGroupBox)
-        self.tab2.setLayout(self.tab2.vbox)
+        self.tab2.hbox.addWidget(self.tab2.formGroupBox_2)
+        self.tab2.hbox.addWidget(self.tab2.formGroupBox_1)
+
+        self.tab2.setLayout(self.tab2.hbox)
 
         # Tab 3 contents
         self.tab3.add_button = QPushButton('Add...')
+        self.tab3.add_button.clicked.connect(self.addDatapoint)
 
         self.tab3.num_datapoints = 0
 
@@ -207,19 +226,15 @@ class Table(QWidget):
         self.setLayout(self.layout)
 
         self.export_button.clicked.connect(self.export)
-        self.tab3.add_button.clicked.connect(self.addDatapoint)
 
     def addSpecies(self):
-        self.tab2.species_names.append(QLineEdit)
-        self.tab2.InChIs.append(QLineEdit)
-        self.tab2.amounts.append(QLineEdit)
-        self.tab2.formLayout.addRow(QLabel('Species ' + str(self.tab2.num_species+1)))
-        self.tab2.formLayout.addRow(QLabel('Name'), self.tab2.species_names[self.tab2.num_species])
-        self.tab2.formLayout.addRow(QLabel('InChI'), self.tab2.InChIs[self.tab2.num_species])
-        self.tab2.formLayout.addRow(QLabel('Amount'), self.tab2.amounts[self.tab2.num_species])
-        self.tab2.formGroupBox.setLayout(self.tab2.formLayout)
-        self.tab2.vbox.addWidget(self.tab2.formGroupBox)
-        self.tab2.setLayout(self.tab2.vbox)
+        self.tab2.species_names.append(QLineEdit())
+        self.tab2.InChIs.append(QLineEdit())
+        self.tab2.amounts.append(QLineEdit())
+        self.tab2.formLayout_1.addRow(QLabel('Species ' + str(self.tab2.num_species+1)))
+        self.tab2.formLayout_1.addRow(QLabel('Name'), self.tab2.species_names[self.tab2.num_species])
+        self.tab2.formLayout_1.addRow(QLabel('InChI'), self.tab2.InChIs[self.tab2.num_species])
+        self.tab2.formLayout_1.addRow(QLabel('Amount'), self.tab2.amounts[self.tab2.num_species])
         self.tab2.num_species += 1
 
     def addDatapoint(self):
@@ -228,15 +243,14 @@ class Table(QWidget):
         self.tab3.ignition_delays.append(QLineEdit())
         self.tab3.equivalence_ratios.append(QLineEdit())
         self.tab3.formLayout.addRow(QLabel('Datapoint ' + str(self.tab3.num_datapoints+1)))
-        self.tab3.formLayout.addRow(QLabel('Temperature'), self.tab3.temperatures[self.tab3.num_datapoints])
-        self.tab3.formLayout.addRow(QLabel('Pressure'), self.tab3.pressures[self.tab3.num_datapoints])
-        self.tab3.formLayout.addRow(QLabel('Ignition Delay'), self.tab3.ignition_delays[self.tab3.num_datapoints])
+        self.tab3.formLayout.addRow(QLabel('Temperature (K)'), self.tab3.temperatures[self.tab3.num_datapoints])
+        self.tab3.formLayout.addRow(QLabel('Pressure (atm)'), self.tab3.pressures[self.tab3.num_datapoints])
+        self.tab3.formLayout.addRow(QLabel('Ignition Delay (us)'), self.tab3.ignition_delays[self.tab3.num_datapoints])
         self.tab3.formLayout.addRow(QLabel('Equivalence Ratio'), self.tab3.equivalence_ratios[self.tab3.num_datapoints])
         self.tab3.formGroupBox.setLayout(self.tab3.formLayout)
         self.tab3.vbox.addWidget(self.tab3.formGroupBox)
         self.tab3.setLayout(self.tab3.vbox)
         self.tab3.num_datapoints += 1
-
 
     def export(self):
         """
@@ -245,23 +259,27 @@ class Table(QWidget):
         ...but it works.
         """
 
+        for i in range(len(self.tab2.species_names)):
+            self.tab2.species.append([self.tab2.species_names[i].text(),
+                                      self.tab2.InChIs[i].text(),
+                                      self.tab2.amounts[i].text()])
+
         for i in range(len(self.tab3.temperatures)):
             self.tab3.datapoints.append([self.tab3.temperatures[i].text(),
                                          self.tab3.ignition_delays[i].text(),
                                          self.tab3.pressures[i].text(),
                                          self.tab3.equivalence_ratios[i].text()])
-        for item in self.tab3.datapoints:
-            print(item)
 
         metadata_labels = ['    name: ', '    ORCID: ',
-                  'file-version: ', 'chemked-version: ']
+                           'file-version: ', 'chemked-version: ']
         reference_labels = ['    doi: ', '    authors: ', '    journal: ', '    year: ',
                             '    volume: ', '    pages: ', '    detail: ']
         datapoint_labels = ['    - temperature:', '      ignition-delay:',
                             '      pressure:', '      composition: *comp',
                             '      ignition-type: *ign', '      equivalence-ratio: ']
 
-        with open('testing.yaml', 'w') as f:
+        with open(self.tab2.species[0][0]+'.yaml', 'w') as f:
+            # Write file metadata
             f.write('---\nfile-author:\n')
             for i in range(len(metadata_labels)):
                 f.write(metadata_labels[i] +
@@ -279,6 +297,22 @@ class Table(QWidget):
                     f.write(reference_labels[i] +
                             self.tab1.reference_values[i].text() +
                             '\n')
+            # Write common properties
+            f.write('experiment-type: ' + self.tab2.experiment_type.text() + '\n')
+            f.write('apparatus:\n')
+            f.write('    kind:  ' + self.tab2.apparatus_kind.text() + '\n')
+            f.write('    institution: ' + self.tab2.apparatus_institution.text() + '\n')
+            f.write('    facility: ' + self.tab2.apparatus_facility.text() + '\n')
+            f.write('common-properties:\n    composition: &comp\n      kind: ')
+            f.write(self.tab2.comp_kind.text() + '\n      species:')
+            for i in range(len(self.tab2.species)):
+                f.write('        - species-name: ' + self.tab2.species[i][0] +
+                        '\n          InChI: ' + self.tab2.species[i][1] +
+                        '\n          amount:\n            - ' + self.tab2.species[i][2] + '\n')
+            f.write('    ignition-type:  &ign\n        target: ' + self.tab2.ignition_target.text() + '\n')
+            f.write('        type: ' + self.tab2.ignition_type.text() + '\n')
+            # Write datapoints
+            # The nested for loop is probably unnecessary here
             f.write('datapoints:\n')
             for j in range(len(self.tab3.datapoints)):
                 for i in range(len(datapoint_labels)):
