@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QPushButton, QMessageBox, QAction
 from PyQt5.QtWidgets import QToolTip, QDesktopWidget, QSpinBox
 from PyQt5.QtWidgets import QHBoxLayout, QVBoxLayout, QTabWidget, QSplashScreen
 from PyQt5.QtWidgets import QLabel, QLineEdit, QFormLayout, QGroupBox
-from PyQt5.QtGui import QFont, QIcon, QPixmap
+from PyQt5.QtGui import QFont, QIcon
 
 
 class Window(QMainWindow):
@@ -73,7 +73,7 @@ class Window(QMainWindow):
 
 class Table(QWidget):
     """
-    This class handles creating tabs and exporting to YAML.
+    This class handles creating tabs, their contents, and exporting to YAML.
     In each tab is file information.
     When the Export button is clicked, the information
     entered is exported to a YAML file.
@@ -135,8 +135,12 @@ class Table(QWidget):
         facility = QLineEdit()
 
         composition_kind = QLineEdit()
-        species = []
-        num_species = QSpinBox()
+        self.tab2.num_species = 0
+
+        self.tab2.species = []
+        self.tab2.species_names = []
+        self.tab2.InChIs = []
+        self.tab2.amounts = []
 
         self.tab2.add_species_button = QPushButton('Add...')
         self.tab2.add_species_button.resize(self.tab2.add_species_button.sizeHint())
@@ -144,7 +148,6 @@ class Table(QWidget):
 
         self.tab2.species_row_header = QHBoxLayout()
         self.tab2.species_row_header.addWidget(QLabel('    Species'))
-        self.tab2.species_row_header.addWidget(num_species)
         self.tab2.species_row_header.addWidget(self.tab2.add_species_button)
 
         self.tab2.vbox = QVBoxLayout()
@@ -162,7 +165,6 @@ class Table(QWidget):
         self.tab2.formLayout.addRow(QLabel('    Composition Information'))
         self.tab2.formLayout.addRow(QLabel('Kind'), composition_kind)
         self.tab2.formLayout.addRow(self.tab2.species_row_header)
-
 
         self.tab2.formGroupBox.setLayout(self.tab2.formLayout)
         self.tab2.vbox.addWidget(self.tab2.formGroupBox)
@@ -208,13 +210,25 @@ class Table(QWidget):
         self.export_button.clicked.connect(self.export)
         self.tab3.add_button.clicked.connect(self.addDatapoint)
 
+    def addSpecies(self):
+        self.tab2.species_names.append(QLineEdit)
+        self.tab2.InChIs.append(QLineEdit)
+        self.tab2.amounts.append(QLineEdit)
+        self.tab2.formLayout.addRow(QLabel('Species ' + str(self.tab2.num_species+1)))
+        self.tab2.formLayout.addRow(QLabel('Name'), self.tab2.species_names[self.tab2.num_species])
+        self.tab2.formLayout.addRow(QLabel('InChI'), self.tab2.InChIs[self.tab2.num_species])
+        self.tab2.formLayout.addRow(QLabel('Amount'), self.tab2.amounts[self.tab2.num_species])
+        self.tab2.formGroupBox.setLayout(self.tab2.formLayout)
+        self.tab2.vbox.addWidget(self.tab2.formGroupBox)
+        self.tab2.setLayout(self.tab2.vbox)
+        self.tab2.num_species += 1
 
     def addDatapoint(self):
-        global temperatures
         self.tab3.temperatures.append(QLineEdit())
         self.tab3.pressures.append(QLineEdit())
         self.tab3.ignition_delays.append(QLineEdit())
         self.tab3.equivalence_ratios.append(QLineEdit())
+        self.tab3.formLayout.addRow(QLabel('Datapoint ' + str(self.tab3.num_datapoints+1)))
         self.tab3.formLayout.addRow(QLabel('Temperature'), self.tab3.temperatures[self.tab3.num_datapoints])
         self.tab3.formLayout.addRow(QLabel('Pressure'), self.tab3.pressures[self.tab3.num_datapoints])
         self.tab3.formLayout.addRow(QLabel('Ignition Delay'), self.tab3.ignition_delays[self.tab3.num_datapoints])
@@ -225,20 +239,28 @@ class Table(QWidget):
         self.tab3.num_datapoints += 1
 
 
-    def addSpecies(self):
-        pass
-
-
     def export(self):
         """
         Exports to a YAML document.
         This can DEFINITELY be optimized further.
         ...but it works.
         """
+
+        for i in range(len(self.tab3.temperatures)):
+            self.tab3.datapoints.append([self.tab3.temperatures[i].text(),
+                                         self.tab3.ignition_delays[i].text(),
+                                         self.tab3.pressures[i].text(),
+                                         self.tab3.equivalence_ratios[i].text()])
+        for item in self.tab3.datapoints:
+            print(item)
+
         metadata_labels = ['    name: ', '    ORCID: ',
                   'file-version: ', 'chemked-version: ']
         reference_labels = ['    doi: ', '    authors: ', '    journal: ', '    year: ',
                             '    volume: ', '    pages: ', '    detail: ']
+        datapoint_labels = ['    - temperature:', '      ignition-delay:',
+                            '      pressure:', '      composition: *comp',
+                            '      ignition-type: *ign', '      equivalence-ratio: ']
 
         with open('testing.txt', 'w') as f:
             f.write('---\nfile-author:\n')
@@ -258,6 +280,19 @@ class Table(QWidget):
                     f.write(reference_labels[i] +
                             self.tab1.reference_values[i].text() +
                             '\n')
+            f.write('datapoints:\n')
+            for j in range(len(self.tab3.datapoints)):
+                for i in range(len(datapoint_labels)):
+                    if i == 0:
+                        f.write(datapoint_labels[i]+'\n        - '+self.tab3.datapoints[j][i]+'\n')
+                    elif i == 1:
+                        f.write(datapoint_labels[i]+'\n        - '+self.tab3.datapoints[j][i]+'\n')
+                    elif i == 2:
+                        f.write(datapoint_labels[i]+'\n        - '+self.tab3.datapoints[j][i]+'\n')
+                    elif i == 3 or i == 4:
+                        f.write(datapoint_labels[i]+'\n')
+                    elif i == 5:
+                        f.write(datapoint_labels[i]+self.tab3.datapoints[j][3]+'\n')
 
 
 def main():
