@@ -2,9 +2,10 @@ import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow
 from PyQt5.QtWidgets import QPushButton, QMessageBox, QAction
 from PyQt5.QtWidgets import QToolTip, QDesktopWidget, QSpinBox
-from PyQt5.QtWidgets import QHBoxLayout, QVBoxLayout, QTabWidget
+from PyQt5.QtWidgets import QHBoxLayout, QVBoxLayout, QTabWidget, QSplashScreen
 from PyQt5.QtWidgets import QLabel, QLineEdit, QFormLayout, QGroupBox
-from PyQt5.QtGui import QFont, QIcon
+from PyQt5.QtGui import QFont, QIcon, QPixmap
+
 
 class Window(QMainWindow):
     """
@@ -13,6 +14,7 @@ class Window(QMainWindow):
     def __init__(self):
         # Inherits class methods from QMainWindow
         super(Window, self).__init__()
+
         self.title = 'Prototype ChemKED GUI'
         self.left = 0
         self.top = 0
@@ -20,6 +22,7 @@ class Window(QMainWindow):
         self.height = 600
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
+        self.setWindowIcon(QIcon('pyked-logo.png'))
 
         self.vbox = QVBoxLayout()
 
@@ -166,6 +169,27 @@ class Table(QWidget):
         self.tab2.setLayout(self.tab2.vbox)
 
         # Tab 3 contents
+        self.tab3.add_button = QPushButton('Add...')
+
+        self.tab3.num_datapoints = 0
+
+        self.tab3.datapoints = []
+        self.tab3.temperatures = []
+        self.tab3.pressures = []
+        self.tab3.ignition_delays = []
+        self.tab3.equivalence_ratios = []
+
+        self.tab3.vbox = QVBoxLayout()
+        self.tab3.formGroupBox = QGroupBox()
+        self.tab3.formLayout = QFormLayout()
+
+        self.tab3.formLayout.header = QHBoxLayout()
+        self.tab3.formLayout.header.addWidget(self.tab3.add_button)
+        self.tab3.formLayout.addItem(self.tab3.formLayout.header)
+
+        self.tab3.formGroupBox.setLayout(self.tab3.formLayout)
+        self.tab3.vbox.addWidget(self.tab3.formGroupBox)
+        self.tab3.setLayout(self.tab3.vbox)
 
         # Add tabs to vbox
         self.tabs.addTab(self.tab1, "File Information")
@@ -182,10 +206,27 @@ class Table(QWidget):
         self.setLayout(self.layout)
 
         self.export_button.clicked.connect(self.export)
+        self.tab3.add_button.clicked.connect(self.addDatapoint)
+
+
+    def addDatapoint(self):
+        global temperatures
+        self.tab3.temperatures.append(QLineEdit())
+        self.tab3.pressures.append(QLineEdit())
+        self.tab3.ignition_delays.append(QLineEdit())
+        self.tab3.equivalence_ratios.append(QLineEdit())
+        self.tab3.formLayout.addRow(QLabel('Temperature'), self.tab3.temperatures[self.tab3.num_datapoints])
+        self.tab3.formLayout.addRow(QLabel('Pressure'), self.tab3.pressures[self.tab3.num_datapoints])
+        self.tab3.formLayout.addRow(QLabel('Ignition Delay'), self.tab3.ignition_delays[self.tab3.num_datapoints])
+        self.tab3.formLayout.addRow(QLabel('Equivalence Ratio'), self.tab3.equivalence_ratios[self.tab3.num_datapoints])
+        self.tab3.formGroupBox.setLayout(self.tab3.formLayout)
+        self.tab3.vbox.addWidget(self.tab3.formGroupBox)
+        self.tab3.setLayout(self.tab3.vbox)
+        self.tab3.num_datapoints += 1
 
 
     def addSpecies(self):
-        self.tab2.formLayout.addRow(QLabel('Test'))
+        pass
 
 
     def export(self):

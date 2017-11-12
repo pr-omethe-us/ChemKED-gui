@@ -32,8 +32,8 @@
       <file leaf-file-name="prototypeGui.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/prototypeGui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="186" column="25" lean-forward="false" selection-start-line="186" selection-start-column="25" selection-end-line="186" selection-end-column="25" />
+            <state relative-caret-position="2150">
+              <caret line="220" column="75" lean-forward="false" selection-start-line="220" selection-start-column="75" selection-end-line="220" selection-end-column="75" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -395,7 +395,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="4" />
+      <option name="time" value="5" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -578,8 +578,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/prototypeGui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="186" column="25" lean-forward="false" selection-start-line="186" selection-start-column="25" selection-end-line="186" selection-end-column="25" />
+        <state relative-caret-position="2150">
+          <caret line="220" column="75" lean-forward="false" selection-start-line="220" selection-start-column="75" selection-end-line="220" selection-end-column="75" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
