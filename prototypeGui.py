@@ -262,7 +262,7 @@ class Table(QWidget):
                             '      pressure:', '      composition: *comp',
                             '      ignition-type: *ign', '      equivalence-ratio: ']
 
-        with open('testing.txt', 'w') as f:
+        with open('testing.yaml', 'w') as f:
             f.write('---\nfile-author:\n')
             for i in range(len(metadata_labels)):
                 f.write(metadata_labels[i] +

@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4c34ccbc-2ae4-46d7-b0e6-f2154ee26538" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chemkedGui.py" afterPath="$PROJECT_DIR$/chemkedGui.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/chemkedGui.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/writeYaml.py" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/prototypeGui.py" afterPath="$PROJECT_DIR$/prototypeGui.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing.txt" afterPath="$PROJECT_DIR$/testing.txt" />
     </list>
@@ -19,21 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="writeYaml.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/writeYaml.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="prototypeGui.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/prototypeGui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="686">
-              <caret line="295" column="0" lean-forward="true" selection-start-line="295" selection-start-column="0" selection-end-line="295" selection-end-column="0" />
+            <state relative-caret-position="153">
+              <caret line="264" column="44" lean-forward="true" selection-start-line="264" selection-start-column="44" selection-end-line="264" selection-end-column="44" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -350,11 +342,11 @@
     <frame x="477" y="22" width="963" height="874" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29032257" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28990227" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936507" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1984127" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32936507" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1984127" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936507" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -472,9 +464,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2068">
           <caret line="100" column="37" lean-forward="false" selection-start-line="100" selection-start-column="37" selection-end-line="100" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#10#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -498,9 +488,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1386">
           <caret line="68" column="51" lean-forward="true" selection-start-line="68" selection-start-column="51" selection-end-line="68" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#10#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -542,24 +530,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/writeYaml.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chemkedGui.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="401">
-          <caret line="47" column="16" lean-forward="false" selection-start-line="47" selection-start-column="16" selection-end-line="47" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#10#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/testing.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="660">
@@ -576,10 +546,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/chemkedGui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="902">
+          <caret line="47" column="16" lean-forward="false" selection-start-line="47" selection-start-column="16" selection-end-line="47" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/writeYaml.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/prototypeGui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="686">
-          <caret line="295" column="0" lean-forward="true" selection-start-line="295" selection-start-column="0" selection-end-line="295" selection-end-column="0" />
+        <state relative-caret-position="153">
+          <caret line="264" column="44" lean-forward="true" selection-start-line="264" selection-start-column="44" selection-end-line="264" selection-end-column="44" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
