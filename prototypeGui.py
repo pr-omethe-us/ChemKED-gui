@@ -1,9 +1,8 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow
-from PyQt5.QtWidgets import QPushButton, QMessageBox, QAction
-from PyQt5.QtWidgets import QToolTip, QDesktopWidget, QSpinBox
-from PyQt5.QtWidgets import QHBoxLayout, QVBoxLayout, QTabWidget, QSplashScreen
-from PyQt5.QtWidgets import QLabel, QLineEdit, QFormLayout, QGroupBox
+from PyQt5.QtWidgets import (QApplication, QWidget, QMainWindow,
+        QPushButton, QMessageBox, QAction, QToolTip, QDesktopWidget, QSpinBox,
+        QHBoxLayout, QVBoxLayout, QTabWidget, QSplashScreen,
+        QLabel, QLineEdit, QFormLayout, QGroupBox)
 from PyQt5.QtGui import QFont, QIcon
 
 
