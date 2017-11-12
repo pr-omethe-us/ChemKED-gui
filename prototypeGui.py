@@ -45,8 +45,7 @@ class Window(QMainWindow):
 
     def center(self):
         """
-        Centers the window
-        on the screen.
+        Centers the window on the screen.
         """
 
         # Get window geometry.
@@ -62,6 +61,9 @@ class Window(QMainWindow):
 
 
     def closeEvent(self, event):
+        """
+        Prompts the user before closing window.
+        """
         reply = QMessageBox.question(self, 'Message',
             "Are you sure to quit?", QMessageBox.Yes |
             QMessageBox.No, QMessageBox.Yes)
@@ -81,6 +83,9 @@ class Table(QWidget):
     """
 
     def __init__(self, parent):
+        """
+        Sets up tabs and contents.
+        """
         super(QWidget, self).__init__(parent)
         self.layout = QVBoxLayout(self)
 
@@ -228,6 +233,9 @@ class Table(QWidget):
         self.export_button.clicked.connect(self.export)
 
     def addSpecies(self):
+        """
+        Adds more fields for species on second tab.
+        """
         self.tab2.species_names.append(QLineEdit())
         self.tab2.InChIs.append(QLineEdit())
         self.tab2.amounts.append(QLineEdit())
@@ -238,6 +246,9 @@ class Table(QWidget):
         self.tab2.num_species += 1
 
     def addDatapoint(self):
+        """
+        Adds more fields for datapoints on third tab.
+        """
         self.tab3.temperatures.append(QLineEdit())
         self.tab3.pressures.append(QLineEdit())
         self.tab3.ignition_delays.append(QLineEdit())
@@ -332,9 +343,10 @@ def main():
     # Define application
     app = QApplication(sys.argv)
 
-    # Define window
+    # Define window (class displays window internally)
     gui = Window()
 
+    # Close smoothly
     sys.exit(app.exec_())
 
 
