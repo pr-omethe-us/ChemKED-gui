@@ -154,11 +154,8 @@ class Table(QWidget):
         self.tab2.InChIs = []
         self.tab2.amounts = []
 
-        # Seems to either be a bug or tricky code with making scroll bars work
-        # self.tab2.scroll_area = QScrollArea()
-        # self.tab2.scroll_area.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
-        # self.tab2.scroll_area.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        # self.tab2.scroll_area.setWidgetResizable(False)
+        self.tab2.scroll_area = QScrollArea()
+        self.tab2.scroll_area.setWidgetResizable(True)
 
         self.tab2.hbox = QHBoxLayout()
         self.tab2.formGroupBox_1 = QGroupBox()
@@ -186,12 +183,11 @@ class Table(QWidget):
         self.tab2.formLayout_2.addRow(QLabel('Target'), self.tab2.ignition_target)
         self.tab2.formLayout_2.addRow(QLabel('Type'), self.tab2.ignition_type)
 
-        # self.tab2.scroll_area.setWidget(self.tab2.formLayout_1)
         self.tab2.formGroupBox_1.setLayout(self.tab2.formLayout_1)
         self.tab2.formGroupBox_2.setLayout(self.tab2.formLayout_2)
-
+        self.tab2.scroll_area.setWidget(self.tab2.formGroupBox_1)
         self.tab2.hbox.addWidget(self.tab2.formGroupBox_2)
-        self.tab2.hbox.addWidget(self.tab2.formGroupBox_1)
+        self.tab2.hbox.addWidget(self.tab2.scroll_area)
 
         self.tab2.setLayout(self.tab2.hbox)
 
@@ -268,10 +264,6 @@ class Table(QWidget):
         self.tab3.formLayout.addRow(QLabel('Pressure (atm)'), self.tab3.pressures[self.tab3.num_datapoints])
         self.tab3.formLayout.addRow(QLabel('Ignition Delay (us)'), self.tab3.ignition_delays[self.tab3.num_datapoints])
         self.tab3.formLayout.addRow(QLabel('Equivalence Ratio'), self.tab3.equivalence_ratios[self.tab3.num_datapoints])
-        self.tab3.formGroupBox.setLayout(self.tab3.formLayout)
-        self.tab3.scroll.setWidget(self.tab3.formGroupBox)
-        self.tab3.vbox.addWidget(self.tab3.scroll)
-        self.tab3.setLayout(self.tab3.vbox)
         self.tab3.num_datapoints += 1
 
     def removeSpecies(self):
