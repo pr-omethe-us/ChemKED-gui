@@ -136,6 +136,8 @@ class Table(QWidget):
         # Tab 2 contents
         self.tab2.add_button = QPushButton('Add...')
         self.tab2.add_button.clicked.connect(self.addSpecies)
+        self.tab2.remove_button = QPushButton('Remove...')
+        self.tab2.remove_button.clicked.connect(self.removeSpecies)
 
         self.tab2.num_species = 0
 
@@ -170,6 +172,7 @@ class Table(QWidget):
         self.tab2.formLayout_1_species_header = QHBoxLayout()
         self.tab2.formLayout_1_species_header.addWidget(QLabel('Species Information'))
         self.tab2.formLayout_1_species_header.addWidget(self.tab2.add_button)
+        self.tab2.formLayout_1_species_header.addWidget(self.tab2.remove_button)
         self.tab2.formLayout_1.addRow(self.tab2.formLayout_1_species_header)
 
         self.tab2.formLayout_2.addRow(QLabel('Experiment Type'), self.tab2.experiment_type)
@@ -195,6 +198,8 @@ class Table(QWidget):
         # Tab 3 contents
         self.tab3.add_button = QPushButton('Add...')
         self.tab3.add_button.clicked.connect(self.addDatapoint)
+        self.tab3.remove_button = QPushButton('Remove...')
+        self.tab3.remove_button.clicked.connect(self.removeDatapoint)
 
         self.tab3.num_datapoints = 0
 
@@ -208,11 +213,12 @@ class Table(QWidget):
         self.tab3.formGroupBox = QGroupBox()
         self.tab3.formLayout = QFormLayout()
 
-        self.tab3.formLayout.header = QHBoxLayout()
-        self.tab3.formLayout.header.addWidget(self.tab3.add_button)
-        self.tab3.formLayout.addItem(self.tab3.formLayout.header)
+        self.tab3.tab_header = QHBoxLayout()
+        self.tab3.tab_header.addWidget(self.tab3.add_button)
+        self.tab3.tab_header.addWidget(self.tab3.remove_button)
 
         self.tab3.formGroupBox.setLayout(self.tab3.formLayout)
+        self.tab3.vbox.addItem(self.tab3.tab_header)
         self.tab3.vbox.addWidget(self.tab3.formGroupBox)
         self.tab3.setLayout(self.tab3.vbox)
 
@@ -262,6 +268,39 @@ class Table(QWidget):
         self.tab3.vbox.addWidget(self.tab3.formGroupBox)
         self.tab3.setLayout(self.tab3.vbox)
         self.tab3.num_datapoints += 1
+
+    def removeSpecies(self):
+        """
+        Removes fields for species in second tab.
+        """
+        if len(self.tab2.species_names) > 0:
+            del self.tab2.species_names[-1]
+            del self.tab2.InChIs[-1]
+            del self.tab2.amounts[-1]
+            remove_iter = 4
+            while remove_iter > 0:
+                self.tab2.formLayout_1.removeRow(self.tab2.formLayout_1.rowCount()-1)
+                remove_iter -= 1
+            self.tab2.num_species -= 1
+        else:
+            pass
+
+    def removeDatapoint(self):
+        """
+        Removes fields for datapoints in third tab.
+        """
+        if len(self.tab3.temperatures) > 0:
+            del self.tab3.temperatures[-1]
+            del self.tab3.pressures[-1]
+            del self.tab3.ignition_delays[-1]
+            del self.tab3.equivalence_ratios[-1]
+            remove_iter = 5
+            while remove_iter > 0:
+                self.tab3.formLayout.removeRow(self.tab3.formLayout.rowCount()-1)
+                remove_iter -= 1
+            self.tab3.num_datapoints -= 1
+        else:
+            pass
 
     def export(self):
         """
