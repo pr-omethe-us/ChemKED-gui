@@ -213,13 +213,17 @@ class Table(QWidget):
         self.tab3.formGroupBox = QGroupBox()
         self.tab3.formLayout = QFormLayout()
 
+        self.tab3.scroll = QScrollArea()
+        self.tab3.scroll.setWidgetResizable(True)
+
         self.tab3.tab_header = QHBoxLayout()
         self.tab3.tab_header.addWidget(self.tab3.add_button)
         self.tab3.tab_header.addWidget(self.tab3.remove_button)
 
         self.tab3.formGroupBox.setLayout(self.tab3.formLayout)
+        self.tab3.scroll.setWidget(self.tab3.formGroupBox)
         self.tab3.vbox.addItem(self.tab3.tab_header)
-        self.tab3.vbox.addWidget(self.tab3.formGroupBox)
+        self.tab3.vbox.addWidget(self.tab3.scroll)
         self.tab3.setLayout(self.tab3.vbox)
 
         # Add tabs to vbox
@@ -265,7 +269,8 @@ class Table(QWidget):
         self.tab3.formLayout.addRow(QLabel('Ignition Delay (us)'), self.tab3.ignition_delays[self.tab3.num_datapoints])
         self.tab3.formLayout.addRow(QLabel('Equivalence Ratio'), self.tab3.equivalence_ratios[self.tab3.num_datapoints])
         self.tab3.formGroupBox.setLayout(self.tab3.formLayout)
-        self.tab3.vbox.addWidget(self.tab3.formGroupBox)
+        self.tab3.scroll.setWidget(self.tab3.formGroupBox)
+        self.tab3.vbox.addWidget(self.tab3.scroll)
         self.tab3.setLayout(self.tab3.vbox)
         self.tab3.num_datapoints += 1
 
