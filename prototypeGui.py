@@ -1,11 +1,14 @@
+"""
+This program creates a GUI for exporting combustion
+experiment data to a YAML file in the ChemKED format.
+"""
+
 import sys
 from PyQt5.QtWidgets import (QApplication, QWidget, QMainWindow,
         QPushButton, QMessageBox, QAction, QToolTip, QDesktopWidget, QSpinBox,
         QHBoxLayout, QVBoxLayout, QTabWidget, QSplashScreen,
-        QLabel, QLineEdit, QFormLayout, QGroupBox, QScrollArea,
-        QScrollBar)
+        QLabel, QLineEdit, QFormLayout, QGroupBox, QScrollArea)
 from PyQt5.QtGui import *
-# from PyQt5.QtCore import *
 
 
 class Window(QMainWindow):
