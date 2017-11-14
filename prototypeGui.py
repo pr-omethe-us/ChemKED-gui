@@ -354,7 +354,7 @@ class Table(QWidget):
             f.write('    institution: ' + self.tab2.apparatus_institution.text() + '\n')
             f.write('    facility: ' + self.tab2.apparatus_facility.text() + '\n')
             f.write('common-properties:\n    composition: &comp\n      kind: ')
-            f.write(self.tab2.comp_kind.text() + '\n      species:')
+            f.write(self.tab2.comp_kind.text() + '\n      species:\n')
             for i in range(len(self.tab2.species)):
                 f.write('        - species-name: ' + self.tab2.species[i][0] +
                         '\n          InChI: ' + self.tab2.species[i][1] +
