@@ -5,10 +5,12 @@ experiment data to a YAML file in the ChemKED format.
 
 import sys
 from PyQt5.QtWidgets import (QApplication, QWidget, QMainWindow,
-        QPushButton, QMessageBox, QAction, QToolTip, QDesktopWidget, QSpinBox,
-        QHBoxLayout, QVBoxLayout, QTabWidget, QSplashScreen,
-        QLabel, QLineEdit, QFormLayout, QGroupBox, QScrollArea)
-from PyQt5.QtGui import *
+                             QPushButton, QMessageBox, QAction,
+                             QToolTip, QDesktopWidget, QSpinBox,
+                             QHBoxLayout, QVBoxLayout, QTabWidget,
+                             QSplashScreen, QLabel, QLineEdit,
+                             QFormLayout, QGroupBox, QScrollArea)
+# from PyQt5.QtGui import *
 
 
 class Window(QMainWindow):
@@ -16,7 +18,6 @@ class Window(QMainWindow):
     Controls main window handling.
     """
     def __init__(self):
-        # Inherits class methods from QMainWindow
         super(Window, self).__init__()
 
         self.title = 'Prototype ChemKED GUI'
@@ -26,15 +27,13 @@ class Window(QMainWindow):
         self.height = 600
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
-        self.setWindowIcon(QIcon('pyked-logo.png'))
+        # self.setWindowIcon(QIcon('pyked-logo.png'))
 
-        # The Tabs class handles the majority of the work.
         self.tabs_widget = Tabs(self)
         self.setCentralWidget(self.tabs_widget)
 
         self.center()
 
-        # Easily close the GUI (without saving)
         close_gui = QAction("&Close GUI", self)
         close_gui.setShortcut('Ctrl+Q')
         close_gui.setStatusTip('Close without saving.')
@@ -47,17 +46,10 @@ class Window(QMainWindow):
         """
         Centers the window on the screen.
         """
-
-        # Get window geometry.
-        qr = self.frameGeometry()
-        # Get screen resolution.
-        cp = QDesktopWidget().availableGeometry().center()
-        # Move center of rectangle of equal size to geometry
-        #  to the center of the screen.
-        qr.moveCenter(cp)
-        # Move the top left corner of the geometry to the
-        #  top left corner of the rectangle.
-        self.move(qr.topLeft())
+        fg = self.frameGeometry()
+        av = QDesktopWidget().availableGeometry().center()
+        fg.moveCenter(av)
+        self.move(fg.topLeft())
 
 
     def closeEvent(self, event):

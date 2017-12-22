@@ -2,10 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4c34ccbc-2ae4-46d7-b0e6-f2154ee26538" name="Default" comment="">
+<<<<<<< HEAD
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/chemkedGui_v0.2.py" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tabsSetup.py" />
+=======
+>>>>>>> 181e909a22047d43511d8d1bedb69e266b5db283
       <change type="DELETED" beforePath="$PROJECT_DIR$/prototypeGui.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/guiv1.1.py" afterPath="$PROJECT_DIR$/guiv1.1.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,6 +22,7 @@
     <favorites_list name="ChemKED-gui" />
   </component>
   <component name="FileEditorManager">
+<<<<<<< HEAD
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf>
@@ -29,10 +34,22 @@
                   <folding>
                     <element signature="e#115#125#0" expanded="true" />
                   </folding>
+=======
+    <splitter split-orientation="horizontal" split-proportion="0.50429183">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="chemkedGui.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/chemkedGui.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="154">
+                  <caret line="7" column="44" lean-forward="true" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
+                  <folding />
+>>>>>>> 181e909a22047d43511d8d1bedb69e266b5db283
                 </state>
               </provider>
             </entry>
           </file>
+<<<<<<< HEAD
           <file leaf-file-name="chemkedGui_v0.2.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/chemkedGui_v0.2.py">
               <provider selected="true" editor-type-id="text-editor">
@@ -43,10 +60,22 @@
                     <element signature="e#1024#1232#0" expanded="false" />
                     <element signature="e#1805#1878#0" expanded="false" />
                   </folding>
+=======
+          <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/README.md">
+              <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+                <state split_layout="SPLIT">
+                  <first_editor relative-caret-position="0">
+                    <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                    <folding />
+                  </first_editor>
+                  <second_editor />
+>>>>>>> 181e909a22047d43511d8d1bedb69e266b5db283
                 </state>
               </provider>
             </entry>
           </file>
+<<<<<<< HEAD
           <file leaf-file-name="tabsSetup.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/tabsSetup.py">
               <provider selected="true" editor-type-id="text-editor">
@@ -55,6 +84,14 @@
                   <folding>
                     <element signature="e#0#10#0" expanded="true" />
                   </folding>
+=======
+          <file leaf-file-name="guiv1.1.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/guiv1.1.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="0">
+                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                  <folding />
+>>>>>>> 181e909a22047d43511d8d1bedb69e266b5db283
                 </state>
               </provider>
             </entry>
@@ -62,6 +99,7 @@
         </leaf>
       </split-first>
       <split-second>
+<<<<<<< HEAD
         <leaf>
           <file leaf-file-name="tabsSetup.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/tabsSetup.py">
@@ -71,6 +109,25 @@
                   <folding>
                     <element signature="e#0#10#0" expanded="true" />
                   </folding>
+=======
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="guiv1.1.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/guiv1.1.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="462">
+                  <caret line="28" column="37" lean-forward="false" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="chemked.py" pinned="false" current-in-tab="false">
+            <entry file="file:///anaconda3/envs/PyKED/lib/python3.6/site-packages/pyked/chemked.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="242">
+                  <caret line="23" column="24" lean-forward="false" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+                  <folding />
+>>>>>>> 181e909a22047d43511d8d1bedb69e266b5db283
                 </state>
               </provider>
             </entry>
@@ -89,6 +146,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>set</find>
+      <find>removeRow</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -104,19 +162,30 @@
         <option value="$PROJECT_DIR$/hierarchy_lists.py" />
         <option value="$PROJECT_DIR$/get_datapoints.py" />
         <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/chemkedGui.py" />
         <option value="$PROJECT_DIR$/testing.py" />
         <option value="$PROJECT_DIR$/prototypeGui.py" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/tabsSetup.py" />
         <option value="$PROJECT_DIR$/chemkedGui_v0.2.py" />
+=======
+        <option value="$PROJECT_DIR$/chemkedGui.py" />
+        <option value="$PROJECT_DIR$/meta.yaml" />
+        <option value="$PROJECT_DIR$/guiv1.1.py" />
+>>>>>>> 181e909a22047d43511d8d1bedb69e266b5db283
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
+<<<<<<< HEAD
     <option name="x" value="32" />
     <option name="y" value="22" />
     <option name="width" value="1888" />
     <option name="height" value="1058" />
+=======
+    <option name="y" value="22" />
+    <option name="width" value="1440" />
+    <option name="height" value="878" />
+>>>>>>> 181e909a22047d43511d8d1bedb69e266b5db283
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -155,8 +224,11 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
       <pane id="Scratches" />
       <pane id="Scope" />
+=======
+>>>>>>> 181e909a22047d43511d8d1bedb69e266b5db283
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -168,10 +240,15 @@
           <select />
         </subPane>
       </pane>
+<<<<<<< HEAD
+=======
+      <pane id="Scratches" />
+      <pane id="Scope" />
+>>>>>>> 181e909a22047d43511d8d1bedb69e266b5db283
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$USER_HOME$/Environments/pyQt5/bin/python3.6" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/michaelbernard/Documents/GitHub/ChemKED-gui/get_datapoints.py" />
   </component>
@@ -219,6 +296,8 @@
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Doctests">
+<<<<<<< HEAD
+=======
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
@@ -253,6 +332,50 @@
       <method />
     </configuration>
     <configuration name="chemkedGui" type="PythonConfigurationType" factoryName="Python" temporary="true">
+>>>>>>> 181e909a22047d43511d8d1bedb69e266b5db283
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="ChemKED-gui" />
+<<<<<<< HEAD
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="ChemKED-gui" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;.&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method />
+    </configuration>
+    <configuration name="chemkedGui" type="PythonConfigurationType" factoryName="Python" temporary="true">
+=======
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/chemkedGui.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <configuration name="guiv1.1" type="PythonConfigurationType" factoryName="Python" temporary="true">
+>>>>>>> 181e909a22047d43511d8d1bedb69e266b5db283
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -264,12 +387,20 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="ChemKED-gui" />
+<<<<<<< HEAD
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/chemkedGui_v0.1.py" />
+=======
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/guiv1.1.py" />
+>>>>>>> 181e909a22047d43511d8d1bedb69e266b5db283
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
+<<<<<<< HEAD
     <configuration name="chemkedGui_v0.2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+=======
+    <configuration name="prototypeGui" type="PythonConfigurationType" factoryName="Python" temporary="true">
+>>>>>>> 181e909a22047d43511d8d1bedb69e266b5db283
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -281,17 +412,26 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="ChemKED-gui" />
+<<<<<<< HEAD
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/chemkedGui_v0.2.py" />
+=======
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/chemkedGui.py" />
+>>>>>>> 181e909a22047d43511d8d1bedb69e266b5db283
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
+<<<<<<< HEAD
     <configuration name="prototypeGui" type="PythonConfigurationType" factoryName="Python" temporary="true">
+=======
+    <configuration name="testing" type="PythonConfigurationType" factoryName="Python" temporary="true">
+>>>>>>> 181e909a22047d43511d8d1bedb69e266b5db283
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
+<<<<<<< HEAD
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -309,6 +449,8 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
+=======
+>>>>>>> 181e909a22047d43511d8d1bedb69e266b5db283
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -342,12 +484,20 @@
       <item index="1" class="java.lang.String" itemvalue="Python.prototypeGui" />
       <item index="2" class="java.lang.String" itemvalue="Python.chemkedGui" />
       <item index="3" class="java.lang.String" itemvalue="Python.testing" />
+<<<<<<< HEAD
       <item index="4" class="java.lang.String" itemvalue="Python.chemkedGui_v0.2" />
+=======
+      <item index="4" class="java.lang.String" itemvalue="Python.guiv1.1" />
+>>>>>>> 181e909a22047d43511d8d1bedb69e266b5db283
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.chemkedGui" />
+<<<<<<< HEAD
         <item index="1" class="java.lang.String" itemvalue="Python.chemkedGui_v0.2" />
+=======
+        <item index="1" class="java.lang.String" itemvalue="Python.guiv1.1" />
+>>>>>>> 181e909a22047d43511d8d1bedb69e266b5db283
         <item index="2" class="java.lang.String" itemvalue="Python.prototypeGui" />
         <item index="3" class="java.lang.String" itemvalue="Python.testing" />
         <item index="4" class="java.lang.String" itemvalue="Python.writeYaml" />
@@ -380,14 +530,21 @@
     <frame x="0" y="22" width="1920" height="1058" extended-state="6" />
     <editor active="true" />
     <layout>
+<<<<<<< HEAD
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12886049" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936507" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19787234" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+=======
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1341853" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936507" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19680852" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+>>>>>>> 181e909a22047d43511d8d1bedb69e266b5db283
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936507" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936507" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3994709" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -429,11 +586,12 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="5" />
+      <option name="time" value="6" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
     <entry file="file://$USER_HOME$/Library/Caches/PyCharmCE2017.1/python_stubs/-2010535109/PyQt5/QtWidgets/QWidget.py" />
     <entry file="file://$PROJECT_DIR$/test1.yaml" />
     <entry file="file://$PROJECT_DIR$/test.yaml" />
@@ -458,6 +616,135 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
           <caret line="7" column="44" lean-forward="true" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
+=======
+    <entry file="file://$PROJECT_DIR$/chemkedGui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="0">
+            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chemkedGui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chemkedGui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chemkedGui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chemkedGui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chemkedGui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chemkedGui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chemkedGui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chemkedGui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chemkedGui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chemkedGui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chemkedGui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chemkedGui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chemkedGui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chemkedGui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" column="50" lean-forward="false" selection-start-line="4" selection-start-column="50" selection-end-line="4" selection-end-column="50" />
+>>>>>>> 181e909a22047d43511d8d1bedb69e266b5db283
           <folding />
         </state>
       </provider>
@@ -475,9 +762,29 @@
     <entry file="file://$PROJECT_DIR$/prototypeGui.py" />
     <entry file="file://$PROJECT_DIR$/writeYaml.py" />
     <entry file="file://$PROJECT_DIR$/testwrite.txt" />
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/prototypeGui.py" />
     <entry file="file://$PROJECT_DIR$/writeYaml.py" />
     <entry file="file://$PROJECT_DIR$/prototypeGui.py" />
+=======
+    <entry file="file://$PROJECT_DIR$/chemkedGui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1584">
+          <caret line="76" column="9" lean-forward="true" selection-start-line="76" selection-start-column="9" selection-end-line="76" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/writeYaml.py" />
+    <entry file="file://$PROJECT_DIR$/chemkedGui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1122">
+          <caret line="53" column="27" lean-forward="false" selection-start-line="53" selection-start-column="27" selection-end-line="53" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+>>>>>>> 181e909a22047d43511d8d1bedb69e266b5db283
     <entry file="file://$PROJECT_DIR$/testwrite.txt" />
     <entry file="file://$PROJECT_DIR$/writeYaml.py" />
     <entry file="file://$PROJECT_DIR$/testwrite.txt" />
@@ -505,6 +812,7 @@
     <entry file="file://$PROJECT_DIR$/testing.py" />
     <entry file="file://$PROJECT_DIR$/writeYaml.py" />
     <entry file="file://$USER_HOME$/Library/Caches/PyCharmCE2017.1/python_stubs/-2010535109/PyQt5/QtWidgets/QWidget.py" />
+<<<<<<< HEAD
     <entry file="file:///anaconda3/envs/PyKED/lib/python3.6/site-packages/pyked/chemked.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
@@ -517,10 +825,63 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="438">
           <caret line="5209" column="8" lean-forward="false" selection-start-line="5209" selection-start-column="8" selection-end-line="5209" selection-end-column="8" />
+=======
+    <entry file="file://$PROJECT_DIR$/test1.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="0">
+            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/meta.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="18" column="18" lean-forward="true" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///anaconda3/envs/PyKED/lib/python3.6/site-packages/pyked/chemked.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="23" column="24" lean-forward="false" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/guiv1.1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> 181e909a22047d43511d8d1bedb69e266b5db283
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
     <entry file="file://$USER_HOME$/Library/Caches/PyCharmCE2017.2/python_stubs/-2010535109/PyQt5/QtWidgets/QMainWindow.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
@@ -558,6 +919,21 @@
           <folding>
             <element signature="e#115#125#0" expanded="true" />
           </folding>
+=======
+    <entry file="file:///anaconda3/envs/PyKED/lib/python3.6/site-packages/PyQt5/QtWidgets.pyi">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="8509" column="17" lean-forward="false" selection-start-line="8509" selection-start-column="8" selection-end-line="8509" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chemkedGui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="7" column="44" lean-forward="true" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
+          <folding />
+>>>>>>> 181e909a22047d43511d8d1bedb69e266b5db283
         </state>
       </provider>
     </entry>
