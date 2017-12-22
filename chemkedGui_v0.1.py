@@ -28,12 +28,9 @@ class Window(QMainWindow):
         self.setGeometry(self.left, self.top, self.width, self.height)
         self.setWindowIcon(QIcon('pyked-logo.png'))
 
-        self.vbox = QVBoxLayout()
-
-        # The Table Class handles the majority of the work.
-        self.table_widget = Table(self)
-        self.vbox.addWidget(self.table_widget)
-        self.setCentralWidget(self.table_widget)
+        # The Tabs class handles the majority of the work.
+        self.tabs_widget = Tabs(self)
+        self.setCentralWidget(self.tabs_widget)
 
         self.center()
 
@@ -77,7 +74,7 @@ class Window(QMainWindow):
             event.ignore()
 
 
-class Table(QWidget):
+class Tabs(QWidget):
     """
     This class handles creating tabs, their contents, and exporting to YAML.
     In each tab is file information.
@@ -119,7 +116,7 @@ class Table(QWidget):
                             year, volume, pages, detail]
         self.tab1.metadata_labels = ['Author Name', 'Author ORCID', 'File Version', 'ChemKED Version']
         self.tab1.reference_labels = ['DOI', 'Author(s)', 'Journal',
-                            'Year', 'Volume', 'Pages', 'Detail']
+                                      'Year', 'Volume', 'Pages', 'Detail']
 
         self.tab1.vbox = QVBoxLayout()
         self.tab1.formGroupBox = QGroupBox()
