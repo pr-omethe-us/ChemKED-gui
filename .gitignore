@@ -99,6 +99,7 @@ ENV/
 
 # mypy
 .mypy_cache/
+<<<<<<< HEAD
 .idea/workspace.xml
 test.yaml
 test1.yaml
@@ -119,3 +120,5 @@ chemkedGui_v0.1.py
 .DS_Store
 Dev/.DS_Store
 Dev/2-butanol.yaml
+=======
+>>>>>>> parent of 38c50cd... Created git ignore
