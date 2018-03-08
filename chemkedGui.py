@@ -8,7 +8,6 @@ from PyQt5.QtWidgets import (QApplication, QWidget, QMainWindow,
 from PyQt5.QtGui import QIcon
 from pyked import __version__, chemked
 
-# Start using PyQt
 app = QApplication(sys.argv)
 
 file = {
@@ -69,7 +68,6 @@ for i in composition_kinds:
     file['common-properties']['kind'].addItem(i)
 
 
-# noinspection PyArgumentList, PyUnresolvedReferences, PyCallByClass
 class Window(QMainWindow):
     """Controls main window size, location, and menu bar.
     """
@@ -115,7 +113,6 @@ class Window(QMainWindow):
             event.ignore()
 
 
-# noinspection PyArgumentList, PyUnresolvedReferences
 class Contents(QWidget):
     """Provides a widget which is the contents of
     the Window class. Widget contains 3 tabs, and
@@ -450,8 +447,109 @@ class Contents(QWidget):
         a YAML file in the ChemKED format.
         """
 
+        """This commented block is the skeleton for checking file robustness before exporting.
+        When completed and worked, uncomment and delete non-robust uncommented version below.
+        """
+        # file_checks_out = False
+        # acceptable_units = []  # This is a list of acceptable temperature, pressure, and time units
+        # for species in file['common-properties']['species']:
+        #     if float(species['amount'].text()):
+        #         pass
+        #     except TypeError:
+        #         # Tell the user amounts must be numbers only
+        #         break
+        # pass
+        # for datapoint in file['datapoints']:
+        #     temp = datapoint['temperature'].text().split()
+        #     if float(temp[0]):
+        #         if temp[1] in acceptable_units:
+        #             pass
+        #         else:
+        #             # Tell the user the units must be of the acceptable units
+        #             break
+        #     except TypeError:
+        #         # Tell the user temperatures must be numbers
+        #         break
+        #
+        #     press = datapoint['pressure'].text().split()
+        #     if float(press[0]):
+        #         if press[1] in acceptable_units:
+        #             pass
+        #         else:
+        #             # Tell the user the units must be of the acceptable units
+        #             break
+        #     except TypeError:
+        #         # Tell the user pressures must be in numbers
+        #
+        #     ig_de = datapoint['ignition-delay'].text().split()
+        #     if float(ig_de[0]):
+        #         if ig_de[1] in acceptable_units:
+        #             file_checks_out = True
+        #         else:
+        #             # Tell the user the units must be of the acceptable units
+        #             break
+        #     except TypeError:
+        #         # Tell the user ignition delays must be numbers
+        #         break
+        #
+        # if file_checks_out = True:
+        #     save_location = self.fileDialog()
+        #     if save_location[0] != '':
+        #         datapoints = []
+        #         atts = ['temperature', 'pressure', 'ignition-delay', 'equivalence-ratio']
+        #         for i in range(len(file['datapoints'])):
+        #             datapoints.append({})
+        #             for att in atts:
+        #                 datapoints[i][att] = [file['datapoints'][i][att].text()]
+        #             datapoints[i]['composition'] = {}
+        #             datapoints[i]['composition']['species'] = []
+        #             for j in range(len(file['common-properties']['species'])):
+        #                 datapoints[i]['composition']['species'].append({})
+        #                 datapoints[i]['composition']['species'][j]['species-name'] = file['common-properties']['species'][j]['species-name'].text()
+        #                 datapoints[i]['composition']['species'][j]['InChI'] = file['common-properties']['species'][j]['InChI'].text()
+        #                 datapoints[i]['composition']['species'][j]['amount'] = [file['common-properties']['species'][j]['amount'].text()]
+        #             datapoints[i]['composition']['kind'] = file['common-properties']['kind'].currentText()
+        #             datapoints[i]['composition']['ignition-type'] = {'target': file['common-properties']['ignition-target'].text(),
+        #                                                              'type': file['common-properties']['ignition-type'].text()}
+        #         file_authors = [{'name': author['name'].text(), 'ORCID': author['ORCID'].text()} for author in file['file-authors']]
+        #         for author in file_authors:
+        #             if author['ORCID'] == '':
+        #                 del author['ORCID']
+        #         ref_authors = [{'name': author['name'].text(), 'ORCID': author['ORCID'].text()} for author in file['reference']['authors']]
+        #         for author in ref_authors:
+        #             if author['ORCID'] == '':
+        #                 del author['ORCID']
+        #
+        #         exported_file = {
+        #             'file-version': file['file-version'].text(),
+        #             'chemked-version': file['chemked-version'].text(),
+        #             'file-authors': file_authors,
+        #             'experiment-type': file['experiment-type'].currentText(),
+        #             'reference': {
+        #                 'doi': file['reference']['doi'].text(),
+        #                 'authors': ref_authors,
+        #                 'journal': file['reference']['journal'].text(),
+        #                 'year': file['reference']['year'].text(),
+        #                 'volume': file['reference']['volume'].text(),
+        #                 'pages': file['reference']['pages'].text(),
+        #                 'detail': file['reference']['detail'].text()
+        #             },
+        #             'apparatus': {
+        #                 'kind': file['apparatus']['kind'].currentText(),
+        #                 'institution': file['apparatus']['institution'].text(),
+        #                 'facility': file['apparatus']['facility'].text(),
+        #             },
+        #             'datapoints': datapoints
+        #         }
+        #
+        #         exported = chemked.ChemKED(dict_input=exported_file, skip_validation=True)
+        #         exported.write_file(save_location[0], overwrite=True)
+        #     else:
+        #         pass
+        # else:
+        #     pass
+
         save_location = self.fileDialog()
-        print(save_location)
         if save_location[0] != '':
             datapoints = []
             atts = ['temperature', 'pressure', 'ignition-delay', 'equivalence-ratio']
@@ -463,9 +561,12 @@ class Contents(QWidget):
                 datapoints[i]['composition']['species'] = []
                 for j in range(len(file['common-properties']['species'])):
                     datapoints[i]['composition']['species'].append({})
-                    datapoints[i]['composition']['species'][j]['species-name'] = file['common-properties']['species'][j]['species-name'].text()
-                    datapoints[i]['composition']['species'][j]['InChI'] = file['common-properties']['species'][j]['InChI'].text()
-                    datapoints[i]['composition']['species'][j]['amount'] = [file['common-properties']['species'][j]['amount'].text()]
+                    datapoints[i]['composition']['species'][j]['species-name'] = file['common-properties']['species'][j][
+                        'species-name'].text()
+                    datapoints[i]['composition']['species'][j]['InChI'] = file['common-properties']['species'][j][
+                        'InChI'].text()
+                    datapoints[i]['composition']['species'][j]['amount'] = [
+                        file['common-properties']['species'][j]['amount'].text()]
                 datapoints[i]['composition']['kind'] = file['common-properties']['kind'].currentText()
                 datapoints[i]['composition']['ignition-type'] = {'target': file['common-properties']['ignition-target'].text(),
                                                                  'type': file['common-properties']['ignition-type'].text()}
@@ -473,7 +574,8 @@ class Contents(QWidget):
             for author in file_authors:
                 if author['ORCID'] == '':
                     del author['ORCID']
-            ref_authors = [{'name': author['name'].text(), 'ORCID': author['ORCID'].text()} for author in file['reference']['authors']]
+            ref_authors = [{'name': author['name'].text(), 'ORCID': author['ORCID'].text()} for author in
+                           file['reference']['authors']]
             for author in ref_authors:
                 if author['ORCID'] == '':
                     del author['ORCID']
@@ -502,9 +604,6 @@ class Contents(QWidget):
 
             exported = chemked.ChemKED(dict_input=exported_file, skip_validation=True)
             exported.write_file(save_location[0], overwrite=True)
-
-        else:
-            pass
 
 
 def main():
