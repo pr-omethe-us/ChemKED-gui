@@ -437,11 +437,10 @@ class Contents(QWidget):
             pass
 
     def fileDialog(self):
-        save_location = QFileDialog.getSaveFileName(self, 'Export File', os.getenv('HOME'))
+        save_location = QFileDialog.getSaveFileName(self, 'Export File', os.getenv('HOME'), 'YAML (*.yaml)')
         if save_location:
             return save_location
         else:
-            print('File not exported.')
             return ''
 
     def export(self):
