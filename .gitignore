@@ -105,3 +105,7 @@ test1.yaml
 .idea/workspace.xml
 *.iml
 *.xml
+*.yaml
+*.xml
+*.iml
+.DS_Store

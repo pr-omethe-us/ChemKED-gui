@@ -1,9 +1,11 @@
 import sys
+from copy import deepcopy
 from PyQt5.QtWidgets import (QApplication, QWidget, QMainWindow,
                              QPushButton, QMessageBox, QAction,
                              QHBoxLayout, QVBoxLayout, QTabWidget,
                              QLabel, QLineEdit, QFormLayout,
-                             QComboBox, QDesktopWidget, QGroupBox, QScrollArea)
+                             QComboBox, QDesktopWidget, QGroupBox,
+                             QFileDialog, QScrollArea)
 from PyQt5.QtGui import QIcon
 from pyked import __version__, chemked
 
@@ -49,9 +51,7 @@ file = {
              'InChI': QLineEdit(),
              'amount': QLineEdit()}
         ],
-        'pressure_rise': QLineEdit(),
-        'pressure': QLineEdit(),
-        'composition-kind': QComboBox(),
+        'kind': QComboBox(),
         'ignition-target': QLineEdit(),
         'ignition-type': QLineEdit()
     }
@@ -67,7 +67,7 @@ for i in apparatus_kinds:
 
 composition_kinds = ['mass fraction', 'mole fraction', 'mole percent']
 for i in composition_kinds:
-    file['common-properties']['composition-kind'].addItem(i)
+    file['common-properties']['kind'].addItem(i)
 
 
 # noinspection PyArgumentList, PyUnresolvedReferences, PyCallByClass
@@ -283,7 +283,7 @@ class Contents(QWidget):
 
         groupbox_comp = QGroupBox()
         self.form_species = QFormLayout()
-        self.form_species.addRow(QLabel('Composition'), file['common-properties']['composition-kind'])
+        self.form_species.addRow(QLabel('Composition'), file['common-properties']['kind'])
         self.form_species.addRow(QLabel(''))
         self.form_species.addRow(hbox_speciesBtns)
         self.form_species.addRow(QLabel('Species 1'))
@@ -444,38 +444,40 @@ class Contents(QWidget):
         ChemKED takes the dictionary as an input and outputs
         a YAML file in the ChemKED format.
         """
-        """
-        Required:
-        - composition = [ {}, {}, ... ] with each {} representing a species
-        - ignition_delay = pint.Quantity
-        - temperature = pint.Quantity
-        - pressure = pint.Quantity
-        - ignition_type = {'target': ..., 'type':...}
-        """
 
-        temp_datapoints = file['datapoints']
-        end_datapoints = []
-        for dp in temp_datapoints:
-            dp['temperature'] = dp['temperature'].text()+' K'
-            dp['pressure'] = dp['pressure'].text()+' atm'
-            dp['ignition-delay'] = dp['ignition-delay'].text()+' s'
-            dp['equivalence-ratio'] = dp['equivalence-ratio'].text()
-            dp['composition'] = [{'species-name': species['species-name'].text(),
-                                  'InChI': species['InChI'].text(),
-                                  'amount': species['amount'].text()}
-                                 for species in file['common-properties']['species']]
-            dp['ignition_type'] = {'target': file['common-properties']['ignition-target'].text(),
-                                   'type': file['common-properties']['ignition-type'].text()}
-            end_datapoints.append(dp)
+        datapoints = []
+        atts = ['temperature', 'pressure', 'ignition-delay', 'equivalence-ratio']
+        for i in range(len(file['datapoints'])):
+            datapoints.append({})
+            for att in atts:
+                datapoints[i][att] = [file['datapoints'][i][att].text()]
+            datapoints[i]['composition'] = {}
+            datapoints[i]['composition']['species'] = []
+            for j in range(len(file['common-properties']['species'])):
+                datapoints[i]['composition']['species'].append({})
+                datapoints[i]['composition']['species'][j]['species-name'] = file['common-properties']['species'][j]['species-name'].text()
+                datapoints[i]['composition']['species'][j]['InChI'] = file['common-properties']['species'][j]['InChI'].text()
+                datapoints[i]['composition']['species'][j]['amount'] = [file['common-properties']['species'][j]['amount'].text()]
+            datapoints[i]['composition']['kind'] = file['common-properties']['kind'].currentText()
+            datapoints[i]['composition']['ignition-type'] = {'target': file['common-properties']['ignition-target'].text(),
+                                                             'type': file['common-properties']['ignition-type'].text()}
+        file_authors = [{'name': author['name'].text(), 'ORCID': author['ORCID'].text()} for author in file['file-authors']]
+        for author in file_authors:
+            if author['ORCID'] == '':
+                del author['ORCID']
+        ref_authors = [{'name': author['name'].text(), 'ORCID': author['ORCID'].text()} for author in file['reference']['authors']]
+        for author in ref_authors:
+            if author['ORCID'] == '':
+                del author['ORCID']
 
         exported_file = {
             'file-version': file['file-version'].text(),
             'chemked-version': file['chemked-version'].text(),
-            'file-authors': [{'name': author['name'].text(), 'ORCID': author['ORCID'].text()} for author in file['file-authors']],
+            'file-authors': file_authors,
             'experiment-type': file['experiment-type'].currentText(),
             'reference': {
                 'doi': file['reference']['doi'].text(),
-                'authors': [{'name': author['name'].text(), 'ORCID': author['ORCID'].text()} for author in file['reference']['authors']],
+                'authors': ref_authors,
                 'journal': file['reference']['journal'].text(),
                 'year': file['reference']['year'].text(),
                 'volume': file['reference']['volume'].text(),
@@ -487,7 +489,7 @@ class Contents(QWidget):
                 'institution': file['apparatus']['institution'].text(),
                 'facility': file['apparatus']['facility'].text(),
             },
-            'datapoints': end_datapoints
+            'datapoints': datapoints
         }
 
         exported = chemked.ChemKED(dict_input=exported_file, skip_validation=True)
