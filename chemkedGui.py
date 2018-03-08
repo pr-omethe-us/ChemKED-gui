@@ -340,7 +340,7 @@ class Contents(QWidget):
 
         # Class Layout Composition
         self.tabs.addTab(self.tab_meta, 'File Metadata')
-        self.tabs.addTab(self.tab_comp, 'Apparatus & Common Properties')
+        self.tabs.addTab(self.tab_comp, 'Common Properties')
         self.tabs.addTab(self.tab_data, 'Datapoints')
         layout = QVBoxLayout()
         layout.addWidget(self.tabs)
