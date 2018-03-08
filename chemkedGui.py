@@ -493,7 +493,7 @@ class Contents(QWidget):
         #         # Tell the user ignition delays must be numbers
         #         break
         #
-        # if file_checks_out = True:
+        # if file_checks_out == True:
         #     save_location = self.fileDialog()
         #     if save_location[0] != '':
         #         datapoints = []
