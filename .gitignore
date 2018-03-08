@@ -110,3 +110,4 @@ test1.yaml
 *.iml
 .DS_Store
 .idea
+*.xml
