@@ -323,14 +323,15 @@ class Contents(QWidget):
         groupbox_data = QGroupBox()
         self.form_data = QFormLayout()
         self.form_data.addRow(QLabel('Datapoint 1'))
-        self.form_data.addRow(QLabel('Temperature (K)'), file['datapoints'][0]['temperature'])
-        self.form_data.addRow(QLabel('Pressure (atm)'), file['datapoints'][0]['pressure'])
-        self.form_data.addRow(QLabel('Ignition Delay (us)'), file['datapoints'][0]['ignition-delay'])
+        self.form_data.addRow(QLabel('Temperature'), file['datapoints'][0]['temperature'])
+        self.form_data.addRow(QLabel('Pressure'), file['datapoints'][0]['pressure'])
+        self.form_data.addRow(QLabel('Ignition Delay'), file['datapoints'][0]['ignition-delay'])
         self.form_data.addRow(QLabel('Equivalence Ratio'), file['datapoints'][0]['equivalence-ratio'])
 
         groupbox_data.setLayout(self.form_data)
         scrollAreaData.setWidget(groupbox_data)
         vbox_tab_data.addLayout(hbox_tab_data)
+        vbox_tab_data.addWidget(QLabel('Inputs should be [Number][Space][Unit] (e.g. 1500 K).'))
         vbox_tab_data.addWidget(scrollAreaData)
 
         self.tab_data.setLayout(vbox_tab_data)
@@ -385,9 +386,9 @@ class Contents(QWidget):
         file['datapoints'].append(new_datapoint)
         j = len(file['datapoints'])
         self.form_data.addRow(QLabel('Datapoint ' + str(j)))
-        self.form_data.addRow(QLabel('Temperature (K)'), file['datapoints'][-1]['temperature'])
-        self.form_data.addRow(QLabel('Pressure (atm)'), file['datapoints'][-1]['pressure'])
-        self.form_data.addRow(QLabel('Ignition Delay (us)'), file['datapoints'][-1]['ignition-delay'])
+        self.form_data.addRow(QLabel('Temperature'), file['datapoints'][-1]['temperature'])
+        self.form_data.addRow(QLabel('Pressure'), file['datapoints'][-1]['pressure'])
+        self.form_data.addRow(QLabel('Ignition Delay'), file['datapoints'][-1]['ignition-delay'])
         self.form_data.addRow(QLabel('Equivalence Ratio'), file['datapoints'][-1]['equivalence-ratio'])
 
     def removeFileAuthor(self):
