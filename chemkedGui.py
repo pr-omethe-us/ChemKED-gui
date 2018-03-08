@@ -1,5 +1,4 @@
 import sys
-from copy import deepcopy
 from PyQt5.QtWidgets import (QApplication, QWidget, QMainWindow,
                              QPushButton, QMessageBox, QAction,
                              QHBoxLayout, QVBoxLayout, QTabWidget,

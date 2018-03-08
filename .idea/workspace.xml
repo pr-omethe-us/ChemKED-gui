@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4c34ccbc-2ae4-46d7-b0e6-f2154ee26538" name="Default" comment="" />
+    <list default="true" id="4c34ccbc-2ae4-46d7-b0e6-f2154ee26538" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chemkedGui.py" afterPath="$PROJECT_DIR$/chemkedGui.py" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,20 +19,19 @@
       <file leaf-file-name="chemkedGui.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/chemkedGui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3454">
-              <caret line="490" column="14" lean-forward="false" selection-start-line="490" selection-start-column="14" selection-end-line="490" selection-end-column="14" />
+            <state relative-caret-position="0">
+              <caret line="0" column="10" lean-forward="false" selection-start-line="0" selection-start-column="10" selection-end-line="0" selection-end-column="10" />
               <folding>
-                <element signature="e#0#10#0" expanded="true" />
-                <element signature="e#2164#3448#0" expanded="false" />
-                <element signature="e#3786#12882#0" expanded="false" />
-                <marker date="1520472519620" expanded="false" signature="12912:13190" ph="..." />
-                <marker date="1520472519620" expanded="false" signature="13219:13519" ph="..." />
-                <marker date="1520472519620" expanded="false" signature="13546:14181" ph="..." />
-                <marker date="1520472519620" expanded="false" signature="14210:14952" ph="..." />
-                <marker date="1520472519620" expanded="false" signature="14985:15223" ph="..." />
-                <marker date="1520472519620" expanded="false" signature="15255:15506" ph="..." />
-                <marker date="1520472519620" expanded="false" signature="15536:15946" ph="..." />
-                <marker date="1520472519620" expanded="false" signature="15978:16379" ph="..." />
+                <element signature="e#2138#3422#0" expanded="false" />
+                <element signature="e#3760#12856#0" expanded="false" />
+                <marker date="1520473563967" expanded="false" signature="12886:13164" ph="..." />
+                <marker date="1520473563967" expanded="false" signature="13193:13493" ph="..." />
+                <marker date="1520473563967" expanded="false" signature="13520:14155" ph="..." />
+                <marker date="1520473563967" expanded="false" signature="14184:14926" ph="..." />
+                <marker date="1520473563967" expanded="false" signature="14959:15197" ph="..." />
+                <marker date="1520473563967" expanded="false" signature="15229:15480" ph="..." />
+                <marker date="1520473563967" expanded="false" signature="15510:15920" ph="..." />
+                <marker date="1520473563967" expanded="false" signature="15952:16353" ph="..." />
               </folding>
             </state>
           </provider>
@@ -51,16 +52,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-367">
               <caret line="113" column="12" lean-forward="true" selection-start-line="113" selection-start-column="12" selection-end-line="113" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="testing.yaml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testing.yaml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="11" column="2" lean-forward="false" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -476,20 +467,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/chemkedGui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3454">
-          <caret line="490" column="14" lean-forward="false" selection-start-line="490" selection-start-column="14" selection-end-line="490" selection-end-column="14" />
+        <state relative-caret-position="0">
+          <caret line="0" column="10" lean-forward="false" selection-start-line="0" selection-start-column="10" selection-end-line="0" selection-end-column="10" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
-            <element signature="e#2164#3448#0" expanded="false" />
-            <element signature="e#3786#12882#0" expanded="false" />
-            <marker date="1520472519620" expanded="false" signature="12912:13190" ph="..." />
-            <marker date="1520472519620" expanded="false" signature="13219:13519" ph="..." />
-            <marker date="1520472519620" expanded="false" signature="13546:14181" ph="..." />
-            <marker date="1520472519620" expanded="false" signature="14210:14952" ph="..." />
-            <marker date="1520472519620" expanded="false" signature="14985:15223" ph="..." />
-            <marker date="1520472519620" expanded="false" signature="15255:15506" ph="..." />
-            <marker date="1520472519620" expanded="false" signature="15536:15946" ph="..." />
-            <marker date="1520472519620" expanded="false" signature="15978:16379" ph="..." />
+            <element signature="e#2138#3422#0" expanded="false" />
+            <element signature="e#3760#12856#0" expanded="false" />
+            <marker date="1520473563967" expanded="false" signature="12886:13164" ph="..." />
+            <marker date="1520473563967" expanded="false" signature="13193:13493" ph="..." />
+            <marker date="1520473563967" expanded="false" signature="13520:14155" ph="..." />
+            <marker date="1520473563967" expanded="false" signature="14184:14926" ph="..." />
+            <marker date="1520473563967" expanded="false" signature="14959:15197" ph="..." />
+            <marker date="1520473563967" expanded="false" signature="15229:15480" ph="..." />
+            <marker date="1520473563967" expanded="false" signature="15510:15920" ph="..." />
+            <marker date="1520473563967" expanded="false" signature="15952:16353" ph="..." />
           </folding>
         </state>
       </provider>
