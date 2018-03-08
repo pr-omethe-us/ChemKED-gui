@@ -99,15 +99,8 @@ ENV/
 
 # mypy
 .mypy_cache/
-.idea/workspace.xml
-test.yaml
-test1.yaml
-.idea/workspace.xml
 *.iml
 *.xml
 *.yaml
-*.xml
-*.iml
 .DS_Store
-.idea
-*.xml
+.idea/
