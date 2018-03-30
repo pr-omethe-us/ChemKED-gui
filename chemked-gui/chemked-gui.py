@@ -435,7 +435,7 @@ class Contents(QWidget):
             pass
 
     def fileDialog(self):
-        save_location = QFileDialog.getSaveFileName(self, 'Export File', os.getenv('HOME'), 'YAML (*.yaml)')
+        save_location = getSaveFileName(self, 'Export File', os.getenv('HOME'), 'YAML (*.yaml)')
         if save_location:
             return save_location
         else:
@@ -604,6 +604,8 @@ class Contents(QWidget):
             }
 
             exported = chemked.ChemKED(dict_input=exported_file, skip_validation=True)
+
+
             exported.write_file(save_location[0], overwrite=True)
 
 
