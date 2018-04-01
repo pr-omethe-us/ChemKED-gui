@@ -1,4 +1,5 @@
-import sys, os
+import sys
+import os
 from PyQt5.QtWidgets import (QApplication, QWidget, QMainWindow,
                              QPushButton, QMessageBox, QAction,
                              QHBoxLayout, QVBoxLayout, QTabWidget,
@@ -10,62 +11,62 @@ from pyked import __version__, chemked
 
 app = QApplication(sys.argv)
 
-file = {
-    'file-authors': [
-        {'name': QLineEdit(),
-         'ORCID': QLineEdit()}
-    ],
-    'file-version': QLineEdit(),
-    'chemked-version': QLineEdit(__version__),
-    'reference': {
-        'doi': QLineEdit(),
-        'authors': [
-            {'name': QLineEdit(),
-             'ORCID': QLineEdit()}
-        ],
-        'journal': QLineEdit(),
-        'year': QLineEdit(),
-        'volume': QLineEdit(),
-        'pages': QLineEdit(),
-        'detail': QLineEdit()
-    },
-    'experiment-type': QComboBox(),
-    'apparatus': {
-        'kind': QComboBox(),
-        'institution': QLineEdit(),
-        'facility': QLineEdit()
-    },
-    'datapoints': [
-        {
-            'temperature': QLineEdit(),
-            'pressure': QLineEdit(),
-            'ignition-delay': QLineEdit(),
-            'equivalence-ratio': QLineEdit()
-        }
-    ],
-    'common-properties': {
-        'species': [
-            {'species-name': QLineEdit(),
-             'InChI': QLineEdit(),
-             'amount': QLineEdit()}
-        ],
-        'kind': QComboBox(),
-        'ignition-target': QLineEdit(),
-        'ignition-type': QLineEdit()
-    }
-}
-
-experiment_types = ['ignition delay']
-for i in experiment_types:
-    file['experiment-type'].addItem(i)
-
-apparatus_kinds = ['rapid compression machine', 'shock tube']
-for i in apparatus_kinds:
-    file['apparatus']['kind'].addItem(i)
-
-composition_kinds = ['mass fraction', 'mole fraction', 'mole percent']
-for i in composition_kinds:
-    file['common-properties']['kind'].addItem(i)
+# file = {
+#     'file-authors': [
+#         {'name': QLineEdit(),
+#          'ORCID': QLineEdit()}
+#     ],
+#     'file-version': QLineEdit(),
+#     'chemked-version': QLineEdit(__version__),
+#     'reference': {
+#         'doi': QLineEdit(),
+#         'authors': [
+#             {'name': QLineEdit(),
+#              'ORCID': QLineEdit()}
+#         ],
+#         'journal': QLineEdit(),
+#         'year': QLineEdit(),
+#         'volume': QLineEdit(),
+#         'pages': QLineEdit(),
+#         'detail': QLineEdit()
+#     },
+#     'experiment-type': QComboBox(),
+#     'apparatus': {
+#         'kind': QComboBox(),
+#         'institution': QLineEdit(),
+#         'facility': QLineEdit()
+#     },
+#     'datapoints': [
+#         {
+#             'temperature': QLineEdit(),
+#             'pressure': QLineEdit(),
+#             'ignition-delay': QLineEdit(),
+#             'equivalence-ratio': QLineEdit()
+#         }
+#     ],
+#     'common-properties': {
+#         'species': [
+#             {'species-name': QLineEdit(),
+#              'InChI': QLineEdit(),
+#              'amount': QLineEdit()}
+#         ],
+#         'kind': QComboBox(),
+#         'ignition-target': QLineEdit(),
+#         'ignition-type': QLineEdit()
+#     }
+# }
+#
+# experiment_types = ['ignition delay']
+# for i in experiment_types:
+#     file['experiment-type'].addItem(i)
+#
+# apparatus_kinds = ['rapid compression machine', 'shock tube']
+# for i in apparatus_kinds:
+#     file['apparatus']['kind'].addItem(i)
+#
+# composition_kinds = ['mass fraction', 'mole fraction', 'mole percent']
+# for i in composition_kinds:
+#     file['common-properties']['kind'].addItem(i)
 
 
 class Window(QMainWindow):
@@ -122,7 +123,62 @@ class Contents(QWidget):
     - Move each tab's setup to it's own function
     """
 
-    global file
+    file = {
+        'file-authors': [
+            {'name': QLineEdit(),
+             'ORCID': QLineEdit()}
+        ],
+        'file-version': QLineEdit(),
+        'chemked-version': QLineEdit(__version__),
+        'reference': {
+            'doi': QLineEdit(),
+            'authors': [
+                {'name': QLineEdit(),
+                 'ORCID': QLineEdit()}
+            ],
+            'journal': QLineEdit(),
+            'year': QLineEdit(),
+            'volume': QLineEdit(),
+            'pages': QLineEdit(),
+            'detail': QLineEdit()
+        },
+        'experiment-type': QComboBox(),
+        'apparatus': {
+            'kind': QComboBox(),
+            'institution': QLineEdit(),
+            'facility': QLineEdit()
+        },
+        'datapoints': [
+            {
+                'temperature': QLineEdit(),
+                'pressure': QLineEdit(),
+                'ignition-delay': QLineEdit(),
+                'equivalence-ratio': QLineEdit()
+            }
+        ],
+        'common-properties': {
+            'species': [
+                {'species-name': QLineEdit(),
+                 'InChI': QLineEdit(),
+                 'amount': QLineEdit()}
+            ],
+            'kind': QComboBox(),
+            'ignition-target': QLineEdit(),
+            'ignition-type': QLineEdit()
+        }
+    }
+
+    experiment_types = ['ignition delay']
+    for i in experiment_types:
+        file['experiment-type'].addItem(i)
+
+    apparatus_kinds = ['rapid compression machine', 'shock tube']
+    for i in apparatus_kinds:
+        file['apparatus']['kind'].addItem(i)
+
+    composition_kinds = ['mass fraction', 'mole fraction', 'mole percent']
+    for i in composition_kinds:
+        file['common-properties']['kind'].addItem(i)
 
     def __init__(self, parent):
         super(QWidget, self).__init__(parent)
@@ -189,12 +245,12 @@ class Contents(QWidget):
         self.form_meta = QFormLayout()
 
         self.form_meta.addRow(QLabel('File Metadata'))
-        self.form_meta.addRow(QLabel('File Version'), file['file-version'])
-        self.form_meta.addRow(QLabel('ChemKED Version'), file['chemked-version'])
+        self.form_meta.addRow(QLabel('File Version'), self.file['file-version'])
+        self.form_meta.addRow(QLabel('ChemKED Version'), self.file['chemked-version'])
         self.form_meta.addRow(QLabel(''))
         self.form_meta.addRow(hbox_metaBtns)
-        self.form_meta.addRow(QLabel('Name'), file['file-authors'][0]['name'])
-        self.form_meta.addRow(QLabel('ORCID'), file['file-authors'][0]['ORCID'])
+        self.form_meta.addRow(QLabel('Name'), self.file['file-authors'][0]['name'])
+        self.form_meta.addRow(QLabel('ORCID'), self.file['file-authors'][0]['ORCID'])
 
         groupbox_meta.setLayout(self.form_meta)
         scrollAreaMeta.setWidget(groupbox_meta)
@@ -209,16 +265,16 @@ class Contents(QWidget):
         self.form_ref = QFormLayout()
 
         self.form_ref.addRow(QLabel('Reference Information'))
-        self.form_ref.addRow(QLabel('DOI'), file['reference']['doi'])
-        self.form_ref.addRow(QLabel('Journal'), file['reference']['journal'])
-        self.form_ref.addRow(QLabel('Year'), file['reference']['year'])
-        self.form_ref.addRow(QLabel('Volume'), file['reference']['volume'])
-        self.form_ref.addRow(QLabel('Pages'), file['reference']['pages'])
-        self.form_ref.addRow(QLabel('Detail'), file['reference']['detail'])
+        self.form_ref.addRow(QLabel('DOI'), self.file['reference']['doi'])
+        self.form_ref.addRow(QLabel('Journal'), self.file['reference']['journal'])
+        self.form_ref.addRow(QLabel('Year'), self.file['reference']['year'])
+        self.form_ref.addRow(QLabel('Volume'), self.file['reference']['volume'])
+        self.form_ref.addRow(QLabel('Pages'), self.file['reference']['pages'])
+        self.form_ref.addRow(QLabel('Detail'), self.file['reference']['detail'])
         self.form_ref.addRow(QLabel(''))
         self.form_ref.addRow(hbox_refBtns)
-        self.form_ref.addRow(QLabel('Name'), file['reference']['authors'][0]['name'])
-        self.form_ref.addRow(QLabel('ORCID'), file['reference']['authors'][0]['ORCID'])
+        self.form_ref.addRow(QLabel('Name'), self.file['reference']['authors'][0]['name'])
+        self.form_ref.addRow(QLabel('ORCID'), self.file['reference']['authors'][0]['ORCID'])
 
         groupbox_ref.setLayout(self.form_ref)
         scrollAreaRef.setWidget(groupbox_ref)
@@ -257,16 +313,16 @@ class Contents(QWidget):
         corresponding to the common properties.
         """
         form_exp = QFormLayout()
-        form_exp.addRow(QLabel('Experiment Type'), file['experiment-type'])
+        form_exp.addRow(QLabel('Experiment Type'), self.file['experiment-type'])
         form_exp.addRow(QLabel(''))
         form_exp.addRow(QLabel('Apparatus Information'))
-        form_exp.addRow(QLabel('Kind'), file['apparatus']['kind'])
-        form_exp.addRow(QLabel('Institution'), file['apparatus']['institution'])
-        form_exp.addRow(QLabel('Facility'), file['apparatus']['facility'])
+        form_exp.addRow(QLabel('Kind'), self.file['apparatus']['kind'])
+        form_exp.addRow(QLabel('Institution'), self.file['apparatus']['institution'])
+        form_exp.addRow(QLabel('Facility'), self.file['apparatus']['facility'])
         form_exp.addRow(QLabel(''))
         form_exp.addRow(QLabel('Ignition Information'))
-        form_exp.addRow(QLabel('Target'), file['common-properties']['ignition-target'])
-        form_exp.addRow(QLabel('Type'), file['common-properties']['ignition-type'])
+        form_exp.addRow(QLabel('Target'), self.file['common-properties']['ignition-target'])
+        form_exp.addRow(QLabel('Type'), self.file['common-properties']['ignition-type'])
 
         """
         The form_species QFormLayout contains fields for
@@ -279,13 +335,13 @@ class Contents(QWidget):
 
         groupbox_comp = QGroupBox()
         self.form_species = QFormLayout()
-        self.form_species.addRow(QLabel('Composition'), file['common-properties']['kind'])
+        self.form_species.addRow(QLabel('Composition'), self.file['common-properties']['kind'])
         self.form_species.addRow(QLabel(''))
         self.form_species.addRow(hbox_speciesBtns)
         self.form_species.addRow(QLabel('Species 1'))
-        self.form_species.addRow(QLabel('Name'), file['common-properties']['species'][0]['species-name'])
-        self.form_species.addRow(QLabel('InChI'), file['common-properties']['species'][0]['InChI'])
-        self.form_species.addRow(QLabel('Amount'), file['common-properties']['species'][0]['amount'])
+        self.form_species.addRow(QLabel('Name'), self.file['common-properties']['species'][0]['species-name'])
+        self.form_species.addRow(QLabel('InChI'), self.file['common-properties']['species'][0]['InChI'])
+        self.form_species.addRow(QLabel('Amount'), self.file['common-properties']['species'][0]['amount'])
 
         groupbox_comp.setLayout(self.form_species)
         scrollAreaComp.setWidget(groupbox_comp)
@@ -294,7 +350,7 @@ class Contents(QWidget):
         hbox_tab_comp.addWidget(scrollAreaComp)
         self.tab_comp.setLayout(hbox_tab_comp)
 
-        # Tab Setup - Datapoint-Specific Info.
+        # Tab Setup - Datapoint-Specific Info
         self.tab_data = QWidget()
 
         """
@@ -323,10 +379,10 @@ class Contents(QWidget):
         groupbox_data = QGroupBox()
         self.form_data = QFormLayout()
         self.form_data.addRow(QLabel('Datapoint 1'))
-        self.form_data.addRow(QLabel('Temperature'), file['datapoints'][0]['temperature'])
-        self.form_data.addRow(QLabel('Pressure'), file['datapoints'][0]['pressure'])
-        self.form_data.addRow(QLabel('Ignition Delay'), file['datapoints'][0]['ignition-delay'])
-        self.form_data.addRow(QLabel('Equivalence Ratio'), file['datapoints'][0]['equivalence-ratio'])
+        self.form_data.addRow(QLabel('Temperature'), self.file['datapoints'][0]['temperature'])
+        self.form_data.addRow(QLabel('Pressure'), self.file['datapoints'][0]['pressure'])
+        self.form_data.addRow(QLabel('Ignition Delay'), self.file['datapoints'][0]['ignition-delay'])
+        self.form_data.addRow(QLabel('Equivalence Ratio'), self.file['datapoints'][0]['equivalence-ratio'])
 
         groupbox_data.setLayout(self.form_data)
         scrollAreaData.setWidget(groupbox_data)
@@ -338,7 +394,6 @@ class Contents(QWidget):
 
         # Export Button
 
-        # Class Layout Composition
         self.tabs.addTab(self.tab_meta, 'File Metadata')
         self.tabs.addTab(self.tab_comp, 'Common Properties')
         self.tabs.addTab(self.tab_data, 'Datapoints')
@@ -348,20 +403,20 @@ class Contents(QWidget):
         self.setLayout(layout)
 
     def addFileAuthor(self):
-        file['file-authors'].append(
+        self.file['file-authors'].append(
             {'name': QLineEdit(),
              'ORCID': QLineEdit()}
         )
-        self.form_meta.addRow(QLabel('Name'), file['file-authors'][-1]['name'])
-        self.form_meta.addRow(QLabel('ORCID'), file['file-authors'][-1]['ORCID'])
+        self.form_meta.addRow(QLabel('Name'), self.file['file-authors'][-1]['name'])
+        self.form_meta.addRow(QLabel('ORCID'), self.file['file-authors'][-1]['ORCID'])
 
     def addRefAuthor(self):
-        file['reference']['authors'].append(
+        self.file['reference']['authors'].append(
             {'name': QLineEdit(),
              'ORCID': QLineEdit()}
         )
-        self.form_ref.addRow(QLabel('Name'), file['reference']['authors'][-1]['name'])
-        self.form_ref.addRow(QLabel('ORCID'), file['reference']['authors'][-1]['ORCID'])
+        self.form_ref.addRow(QLabel('Name'), self.file['reference']['authors'][-1]['name'])
+        self.form_ref.addRow(QLabel('ORCID'), self.file['reference']['authors'][-1]['ORCID'])
 
     def addSpecies(self):
         new_species = {
@@ -369,12 +424,12 @@ class Contents(QWidget):
             'InChI': QLineEdit(),
             'amount': QLineEdit()
         }
-        file['common-properties']['species'].append(new_species)
-        j = len(file['common-properties']['species'])
+        self.file['common-properties']['species'].append(new_species)
+        j = len(self.file['common-properties']['species'])
         self.form_species.addRow(QLabel('Species ' + str(j)))
-        self.form_species.addRow(QLabel('Name'), file['common-properties']['species'][-1]['species-name'])
-        self.form_species.addRow(QLabel('InChI'), file['common-properties']['species'][-1]['InChI'])
-        self.form_species.addRow(QLabel('Amount'), file['common-properties']['species'][-1]['amount'])
+        self.form_species.addRow(QLabel('Name'), self.file['common-properties']['species'][-1]['species-name'])
+        self.form_species.addRow(QLabel('InChI'), self.file['common-properties']['species'][-1]['InChI'])
+        self.form_species.addRow(QLabel('Amount'), self.file['common-properties']['species'][-1]['amount'])
 
     def addDatapoint(self):
         new_datapoint = {
@@ -383,59 +438,59 @@ class Contents(QWidget):
             'ignition-delay': QLineEdit(),
             'equivalence-ratio': QLineEdit()
         }
-        file['datapoints'].append(new_datapoint)
-        j = len(file['datapoints'])
+        self.file['datapoints'].append(new_datapoint)
+        j = len(self.file['datapoints'])
         self.form_data.addRow(QLabel('Datapoint ' + str(j)))
-        self.form_data.addRow(QLabel('Temperature'), file['datapoints'][-1]['temperature'])
-        self.form_data.addRow(QLabel('Pressure'), file['datapoints'][-1]['pressure'])
-        self.form_data.addRow(QLabel('Ignition Delay'), file['datapoints'][-1]['ignition-delay'])
-        self.form_data.addRow(QLabel('Equivalence Ratio'), file['datapoints'][-1]['equivalence-ratio'])
+        self.form_data.addRow(QLabel('Temperature'), self.file['datapoints'][-1]['temperature'])
+        self.form_data.addRow(QLabel('Pressure'), self.file['datapoints'][-1]['pressure'])
+        self.form_data.addRow(QLabel('Ignition Delay'), self.file['datapoints'][-1]['ignition-delay'])
+        self.form_data.addRow(QLabel('Equivalence Ratio'), self.file['datapoints'][-1]['equivalence-ratio'])
 
     def removeFileAuthor(self):
         j = self.form_meta.rowCount() - 1
-        if len(file['file-authors']) > 1:
+        if len(self.file['file-authors']) > 1:
             self.form_meta.removeRow(j)
             self.form_meta.removeRow(j-1)
-            del file['file-authors'][-1]
+            del self.file['file-authors'][-1]
         else:
             pass
 
     def removeRefAuthor(self):
         j = self.form_ref.rowCount() - 1
-        if len(file['reference']['authors']) > 1:
+        if len(self.file['reference']['authors']) > 1:
             self.form_ref.removeRow(j)
             self.form_ref.removeRow(j-1)
-            del file['reference']['authors'][-1]
+            del self.file['reference']['authors'][-1]
         else:
             pass
 
     def removeSpecies(self):
         j = self.form_species.rowCount() - 1
-        if len(file['common-properties']['species']) > 1:
+        if len(self.file['common-properties']['species']) > 1:
             # Todo: make this a for loop
             self.form_species.removeRow(j)
             self.form_species.removeRow(j-1)
             self.form_species.removeRow(j-2)
             self.form_species.removeRow(j-3)
-            del file['common-properties']['species'][-1]
+            del self.file['common-properties']['species'][-1]
         else:
             pass
 
     def removeDatapoint(self):
         j = self.form_data.rowCount() - 1
-        if len(file['datapoints']) > 1:
+        if len(self.file['datapoints']) > 1:
             # Todo: make this a for loop
             self.form_data.removeRow(j)
             self.form_data.removeRow(j-1)
             self.form_data.removeRow(j-2)
             self.form_data.removeRow(j-3)
             self.form_data.removeRow(j-4)
-            del file['datapoints'][-1]
+            del self.file['datapoints'][-1]
         else:
             pass
 
     def fileDialog(self):
-        save_location = getSaveFileName(self, 'Export File', os.getenv('HOME'), 'YAML (*.yaml)')
+        save_location = QFileDialog.getSaveFileName(self, 'Export File', os.getenv('HOME'), 'YAML (*.yaml)')
         if save_location:
             return save_location
         else:
@@ -448,157 +503,59 @@ class Contents(QWidget):
         a YAML file in the ChemKED format.
         """
 
-        """This commented block is the skeleton for checking file robustness before exporting.
-        When completed and worked, uncomment and delete non-robust uncommented version below.
-        """
-        # file_checks_out = False
-        # acceptable_units = []  # This is a list of acceptable temperature, pressure, and time units
-        # for species in file['common-properties']['species']:
-        #     if float(species['amount'].text()):
-        #         pass
-        #     except TypeError:
-        #         # Tell the user amounts must be numbers only
-        #         break
-        # pass
-        # for datapoint in file['datapoints']:
-        #     temp = datapoint['temperature'].text().split()
-        #     if float(temp[0]):
-        #         if temp[1] in acceptable_units:
-        #             pass
-        #         else:
-        #             # Tell the user the units must be of the acceptable units
-        #             break
-        #     except TypeError:
-        #         # Tell the user temperatures must be numbers
-        #         break
-        #
-        #     press = datapoint['pressure'].text().split()
-        #     if float(press[0]):
-        #         if press[1] in acceptable_units:
-        #             pass
-        #         else:
-        #             # Tell the user the units must be of the acceptable units
-        #             break
-        #     except TypeError:
-        #         # Tell the user pressures must be in numbers
-        #
-        #     ig_de = datapoint['ignition-delay'].text().split()
-        #     if float(ig_de[0]):
-        #         if ig_de[1] in acceptable_units:
-        #             file_checks_out = True
-        #         else:
-        #             # Tell the user the units must be of the acceptable units
-        #             break
-        #     except TypeError:
-        #         # Tell the user ignition delays must be numbers
-        #         break
-        #
-        # if file_checks_out == True:
-        #     save_location = self.fileDialog()
-        #     if save_location[0] != '':
-        #         datapoints = []
-        #         atts = ['temperature', 'pressure', 'ignition-delay', 'equivalence-ratio']
-        #         for i in range(len(file['datapoints'])):
-        #             datapoints.append({})
-        #             for att in atts:
-        #                 datapoints[i][att] = [file['datapoints'][i][att].text()]
-        #             datapoints[i]['composition'] = {}
-        #             datapoints[i]['composition']['species'] = []
-        #             for j in range(len(file['common-properties']['species'])):
-        #                 datapoints[i]['composition']['species'].append({})
-        #                 datapoints[i]['composition']['species'][j]['species-name'] = file['common-properties']['species'][j]['species-name'].text()
-        #                 datapoints[i]['composition']['species'][j]['InChI'] = file['common-properties']['species'][j]['InChI'].text()
-        #                 datapoints[i]['composition']['species'][j]['amount'] = [file['common-properties']['species'][j]['amount'].text()]
-        #             datapoints[i]['composition']['kind'] = file['common-properties']['kind'].currentText()
-        #             datapoints[i]['composition']['ignition-type'] = {'target': file['common-properties']['ignition-target'].text(),
-        #                                                              'type': file['common-properties']['ignition-type'].text()}
-        #         file_authors = [{'name': author['name'].text(), 'ORCID': author['ORCID'].text()} for author in file['file-authors']]
-        #         for author in file_authors:
-        #             if author['ORCID'] == '':
-        #                 del author['ORCID']
-        #         ref_authors = [{'name': author['name'].text(), 'ORCID': author['ORCID'].text()} for author in file['reference']['authors']]
-        #         for author in ref_authors:
-        #             if author['ORCID'] == '':
-        #                 del author['ORCID']
-        #
-        #         exported_file = {
-        #             'file-version': file['file-version'].text(),
-        #             'chemked-version': file['chemked-version'].text(),
-        #             'file-authors': file_authors,
-        #             'experiment-type': file['experiment-type'].currentText(),
-        #             'reference': {
-        #                 'doi': file['reference']['doi'].text(),
-        #                 'authors': ref_authors,
-        #                 'journal': file['reference']['journal'].text(),
-        #                 'year': file['reference']['year'].text(),
-        #                 'volume': file['reference']['volume'].text(),
-        #                 'pages': file['reference']['pages'].text(),
-        #                 'detail': file['reference']['detail'].text()
-        #             },
-        #             'apparatus': {
-        #                 'kind': file['apparatus']['kind'].currentText(),
-        #                 'institution': file['apparatus']['institution'].text(),
-        #                 'facility': file['apparatus']['facility'].text(),
-        #             },
-        #             'datapoints': datapoints
-        #         }
-        #
-        #         exported = chemked.ChemKED(dict_input=exported_file, skip_validation=True)
-        #         exported.write_file(save_location[0], overwrite=True)
-        #     else:
-        #         pass
-        # else:
-        #     pass
-
         save_location = self.fileDialog()
         if save_location[0] != '':
             datapoints = []
             atts = ['temperature', 'pressure', 'ignition-delay', 'equivalence-ratio']
-            for i in range(len(file['datapoints'])):
+            for i in range(len(self.file['datapoints'])):
                 datapoints.append({})
                 for att in atts:
-                    datapoints[i][att] = [file['datapoints'][i][att].text()]
+                    datapoints[i][att] = [self.file['datapoints'][i][att].text()]
                 datapoints[i]['composition'] = {}
                 datapoints[i]['composition']['species'] = []
-                for j in range(len(file['common-properties']['species'])):
+                for j in range(len(self.file['common-properties']['species'])):
                     datapoints[i]['composition']['species'].append({})
-                    datapoints[i]['composition']['species'][j]['species-name'] = file['common-properties']['species'][j][
-                        'species-name'].text()
-                    datapoints[i]['composition']['species'][j]['InChI'] = file['common-properties']['species'][j][
-                        'InChI'].text()
-                    datapoints[i]['composition']['species'][j]['amount'] = [
-                        file['common-properties']['species'][j]['amount'].text()]
-                datapoints[i]['composition']['kind'] = file['common-properties']['kind'].currentText()
-                datapoints[i]['composition']['ignition-type'] = {'target': file['common-properties']['ignition-target'].text(),
-                                                                 'type': file['common-properties']['ignition-type'].text()}
-            file_authors = [{'name': author['name'].text(), 'ORCID': author['ORCID'].text()} for author in file['file-authors']]
+                    datapoints[i]['composition']['species'][j]['species-name'] = \
+                        self.file['common-properties']['species'][j]['species-name'].text()
+                    datapoints[i]['composition']['species'][j]['InChI'] = \
+                        self.file['common-properties']['species'][j]['InChI'].text()
+                    datapoints[i]['composition']['species'][j]['amount'] = \
+                        [self.file['common-properties']['species'][j]['amount'].text()]
+                datapoints[i]['composition']['kind'] = self.file['common-properties']['kind'].currentText()
+                datapoints[i]['composition']['ignition-type'] = {
+                    'target': self.file['common-properties']['ignition-target'].text(),
+                    'type': self.file['common-properties']['ignition-type'].text()
+                }
+            file_authors = [
+                {'name': author['name'].text(), 'ORCID': author['ORCID'].text()} for author in self.file['file-authors']
+            ]
             for author in file_authors:
                 if author['ORCID'] == '':
                     del author['ORCID']
             ref_authors = [{'name': author['name'].text(), 'ORCID': author['ORCID'].text()} for author in
-                           file['reference']['authors']]
+                           self.file['reference']['authors']]
             for author in ref_authors:
                 if author['ORCID'] == '':
                     del author['ORCID']
 
             exported_file = {
-                'file-version': file['file-version'].text(),
-                'chemked-version': file['chemked-version'].text(),
+                'file-version': self.file['file-version'].text(),
+                'chemked-version': self.file['chemked-version'].text(),
                 'file-authors': file_authors,
-                'experiment-type': file['experiment-type'].currentText(),
+                'experiment-type': self.file['experiment-type'].currentText(),
                 'reference': {
-                    'doi': file['reference']['doi'].text(),
+                    'doi': self.file['reference']['doi'].text(),
                     'authors': ref_authors,
-                    'journal': file['reference']['journal'].text(),
-                    'year': file['reference']['year'].text(),
-                    'volume': file['reference']['volume'].text(),
-                    'pages': file['reference']['pages'].text(),
-                    'detail': file['reference']['detail'].text()
+                    'journal': self.file['reference']['journal'].text(),
+                    'year': self.file['reference']['year'].text(),
+                    'volume': self.file['reference']['volume'].text(),
+                    'pages': self.file['reference']['pages'].text(),
+                    'detail': self.file['reference']['detail'].text()
                 },
                 'apparatus': {
-                    'kind': file['apparatus']['kind'].currentText(),
-                    'institution': file['apparatus']['institution'].text(),
-                    'facility': file['apparatus']['facility'].text(),
+                    'kind': self.file['apparatus']['kind'].currentText(),
+                    'institution': self.file['apparatus']['institution'].text(),
+                    'facility': self.file['apparatus']['facility'].text(),
                 },
                 'datapoints': datapoints
             }
