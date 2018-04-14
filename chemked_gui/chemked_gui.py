@@ -11,64 +11,6 @@ from pyked import __version__, chemked
 
 app = QApplication(sys.argv)
 
-# file = {
-#     'file-authors': [
-#         {'name': QLineEdit(),
-#          'ORCID': QLineEdit()}
-#     ],
-#     'file-version': QLineEdit(),
-#     'chemked-version': QLineEdit(__version__),
-#     'reference': {
-#         'doi': QLineEdit(),
-#         'authors': [
-#             {'name': QLineEdit(),
-#              'ORCID': QLineEdit()}
-#         ],
-#         'journal': QLineEdit(),
-#         'year': QLineEdit(),
-#         'volume': QLineEdit(),
-#         'pages': QLineEdit(),
-#         'detail': QLineEdit()
-#     },
-#     'experiment-type': QComboBox(),
-#     'apparatus': {
-#         'kind': QComboBox(),
-#         'institution': QLineEdit(),
-#         'facility': QLineEdit()
-#     },
-#     'datapoints': [
-#         {
-#             'temperature': QLineEdit(),
-#             'pressure': QLineEdit(),
-#             'ignition-delay': QLineEdit(),
-#             'equivalence-ratio': QLineEdit()
-#         }
-#     ],
-#     'common-properties': {
-#         'species': [
-#             {'species-name': QLineEdit(),
-#              'InChI': QLineEdit(),
-#              'amount': QLineEdit()}
-#         ],
-#         'kind': QComboBox(),
-#         'ignition-target': QLineEdit(),
-#         'ignition-type': QLineEdit()
-#     }
-# }
-#
-# experiment_types = ['ignition delay']
-# for i in experiment_types:
-#     file['experiment-type'].addItem(i)
-#
-# apparatus_kinds = ['rapid compression machine', 'shock tube']
-# for i in apparatus_kinds:
-#     file['apparatus']['kind'].addItem(i)
-#
-# composition_kinds = ['mass fraction', 'mole fraction', 'mole percent']
-# for i in composition_kinds:
-#     file['common-properties']['kind'].addItem(i)
-
-
 class Window(QMainWindow):
     """Controls main window size, location, and menu bar.
     """
@@ -163,8 +105,8 @@ class Contents(QWidget):
                  'amount': QLineEdit()}
             ],
             'kind': QComboBox(),
-            'ignition-target': QLineEdit(),
-            'ignition-type': QLineEdit()
+            'ignition-target': QComboBox(),
+            'ignition-type': QComboBox()
         }
     }
 
@@ -179,6 +121,14 @@ class Contents(QWidget):
     composition_kinds = ['mass fraction', 'mole fraction', 'mole percent']
     for i in composition_kinds:
         file['common-properties']['kind'].addItem(i)
+
+    ignition_targets = ['temperature', 'pressure', 'OH', 'OH*', 'CH', 'CH*']
+    for i in ignition_targets:
+        file['common-properties']['ignition-target'].addItem(i)
+
+    ignition_types = ['d/dt max', 'max', '1/2 max', 'min', 'd/dt max extrapolated']
+    for i in ignition_types:
+        file['common-properties']['ignition-type'].addItem(i)
 
     def __init__(self, parent):
         super(QWidget, self).__init__(parent)
@@ -523,8 +473,8 @@ class Contents(QWidget):
                         [self.file['common-properties']['species'][j]['amount'].text()]
                 datapoints[i]['composition']['kind'] = self.file['common-properties']['kind'].currentText()
                 datapoints[i]['composition']['ignition-type'] = {
-                    'target': self.file['common-properties']['ignition-target'].text(),
-                    'type': self.file['common-properties']['ignition-type'].text()
+                    'target': self.file['common-properties']['ignition-target'].currentText(),
+                    'type': self.file['common-properties']['ignition-type'].currentText()
                 }
             file_authors = [
                 {'name': author['name'].text(), 'ORCID': author['ORCID'].text()} for author in self.file['file-authors']
@@ -560,17 +510,13 @@ class Contents(QWidget):
                 'datapoints': datapoints
             }
 
-            exported = chemked.ChemKED(dict_input=exported_file, skip_validation=True)
+            try:
+                exported = chemked.ChemKED(dict_input=exported_file, skip_validation=True)
+                exported.write_file(save_location[0], overwrite=True)
+            except:
+                QMessageBox.about(self, 'Error', "Can't export to ChemKED. Make sure all data and units are input correctly.")
+                print('Error making a ChemKED object with input data.')
 
-
-            exported.write_file(save_location[0], overwrite=True)
-
-
-def main():
-    gui = Window()
-    gui.show()
-    sys.exit(app.exec_())
-
-
-if __name__ == '__main__':
-    main()
+gui = Window()
+gui.show()
+sys.exit(app.exec_())

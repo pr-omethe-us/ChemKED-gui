@@ -8,15 +8,15 @@ install_requires = ['pyked>=0.4.0',
 python_requires = '>=3.5'
 
 setup(
-    name='chemked-gui',
+    name='chemked_gui',
     version='0.1.0',
     url='https://github.com/pr-omethe-us/ChemKED-gui',
     license='BSD 3-Clause',
     install_requires=install_requires,
     python_requires=python_requires,
     long_description=long_description,
-    packages=['chemked-gui'],
-    package_dir={'chemked-gui': 'chemked-gui'},
+    packages=['chemked_gui'],
+    package_dir={'chemked_gui': 'chemked_gui'},
     keywords=['chemical kinetics'],
     classifiers=[
         'Development Status :: 3 - Alpha',
