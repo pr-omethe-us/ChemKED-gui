@@ -9,7 +9,6 @@ from PyQt5.QtWidgets import (QApplication, QWidget, QMainWindow,
 from PyQt5.QtGui import QIcon
 from pyked import __version__, chemked
 
-app = QApplication(sys.argv)
 
 class Window(QMainWindow):
     """Controls main window size, location, and menu bar.
@@ -26,14 +25,17 @@ class Window(QMainWindow):
         self.setGeometry(self.left, self.top, self.width, self.height)
         self.setWindowIcon(QIcon('pyked-logo.png'))
 
-        contents = Contents(self)
-        self.setCentralWidget(contents)
+        self.setWindowContents()
 
         self.center()
 
         close_gui = QAction('&Close GUI', self)
         close_gui.setShortcut('Ctrl+Q')
         close_gui.triggered.connect(self.closeEvent)
+
+    def setWindowContents(self):
+        contents = Contents(self)
+        self.setCentralWidget(contents)
 
     def center(self):
         """Centers the window on the screen.
@@ -65,73 +67,76 @@ class Contents(QWidget):
     - Move each tab's setup to it's own function
     """
 
-    file = {
-        'file-authors': [
-            {'name': QLineEdit(),
-             'ORCID': QLineEdit()}
-        ],
-        'file-version': QLineEdit(),
-        'chemked-version': QLineEdit(__version__),
-        'reference': {
-            'doi': QLineEdit(),
-            'authors': [
+    def __init__(self, parent):
+        super(QWidget, self).__init__(parent)
+
+        # This is the exported dictionary
+        self.file = {
+            'file-authors': [
                 {'name': QLineEdit(),
                  'ORCID': QLineEdit()}
             ],
-            'journal': QLineEdit(),
-            'year': QLineEdit(),
-            'volume': QLineEdit(),
-            'pages': QLineEdit(),
-            'detail': QLineEdit()
-        },
-        'experiment-type': QComboBox(),
-        'apparatus': {
-            'kind': QComboBox(),
-            'institution': QLineEdit(),
-            'facility': QLineEdit()
-        },
-        'datapoints': [
-            {
-                'temperature': QLineEdit(),
-                'pressure': QLineEdit(),
-                'ignition-delay': QLineEdit(),
-                'equivalence-ratio': QLineEdit()
-            }
-        ],
-        'common-properties': {
-            'species': [
-                {'species-name': QLineEdit(),
-                 'InChI': QLineEdit(),
-                 'amount': QLineEdit()}
+            'file-version': QLineEdit(),
+            'chemked-version': QLineEdit(__version__),
+            'reference': {
+                'doi': QLineEdit(),
+                'authors': [
+                    {'name': QLineEdit(),
+                     'ORCID': QLineEdit()}
+                ],
+                'journal': QLineEdit(),
+                'year': QLineEdit(),
+                'volume': QLineEdit(),
+                'pages': QLineEdit(),
+                'detail': QLineEdit()
+            },
+            'experiment-type': QComboBox(),
+            'apparatus': {
+                'kind': QComboBox(),
+                'institution': QLineEdit(),
+                'facility': QLineEdit()
+            },
+            'datapoints': [
+                {
+                    'temperature': QLineEdit(),
+                    'pressure': QLineEdit(),
+                    'ignition-delay': QLineEdit(),
+                    'equivalence-ratio': QLineEdit()
+                }
             ],
-            'kind': QComboBox(),
-            'ignition-target': QComboBox(),
-            'ignition-type': QComboBox()
+            'common-properties': {
+                'species': [
+                    {'species-name': QLineEdit(),
+                     'InChI': QLineEdit(),
+                     'amount': QLineEdit()}
+                ],
+                'kind': QComboBox(),
+                'ignition-target': QComboBox(),
+                'ignition-type': QComboBox()
+            }
         }
-    }
 
-    experiment_types = ['ignition delay']
-    for i in experiment_types:
-        file['experiment-type'].addItem(i)
+        experiment_types = ['ignition delay']
+        for i in experiment_types:
+            self.file['experiment-type'].addItem(i)
 
-    apparatus_kinds = ['rapid compression machine', 'shock tube']
-    for i in apparatus_kinds:
-        file['apparatus']['kind'].addItem(i)
+        apparatus_kinds = ['rapid compression machine', 'shock tube']
+        for i in apparatus_kinds:
+            self.file['apparatus']['kind'].addItem(i)
 
-    composition_kinds = ['mass fraction', 'mole fraction', 'mole percent']
-    for i in composition_kinds:
-        file['common-properties']['kind'].addItem(i)
+        composition_kinds = ['mass fraction', 'mole fraction', 'mole percent']
+        for i in composition_kinds:
+            self.file['common-properties']['kind'].addItem(i)
 
-    ignition_targets = ['temperature', 'pressure', 'OH', 'OH*', 'CH', 'CH*']
-    for i in ignition_targets:
-        file['common-properties']['ignition-target'].addItem(i)
+        ignition_targets = ['temperature', 'pressure', 'OH', 'OH*', 'CH', 'CH*']
+        for i in ignition_targets:
+            self.file['common-properties']['ignition-target'].addItem(i)
 
-    ignition_types = ['d/dt max', 'max', '1/2 max', 'min', 'd/dt max extrapolated']
-    for i in ignition_types:
-        file['common-properties']['ignition-type'].addItem(i)
+        ignition_types = ['d/dt max', 'max', '1/2 max', 'min', 'd/dt max extrapolated']
+        for i in ignition_types:
+            self.file['common-properties']['ignition-type'].addItem(i)
 
-    def __init__(self, parent):
-        super(QWidget, self).__init__(parent)
+        # Persistent export button at bottom of gui
 
         btn_export = QPushButton('Export')
         btn_export.clicked.connect(self.export)
@@ -517,6 +522,13 @@ class Contents(QWidget):
                 QMessageBox.about(self, 'Error', "Can't export to ChemKED. Make sure all data and units are input correctly.")
                 print('Error making a ChemKED object with input data.')
 
-gui = Window()
-gui.show()
-sys.exit(app.exec_())
+
+def main():
+    app = QApplication(sys.argv)
+    gui = Window()
+    gui.show()
+    sys.exit(app.exec_())
+
+
+if __name__ == '__main__':
+    main()
