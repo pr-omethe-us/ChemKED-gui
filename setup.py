@@ -9,7 +9,7 @@ python_requires = '>=3.5'
 
 setup(
     name='chemked_gui',
-    version='0.1.1',
+    version='0.1.2',
     url='https://github.com/mdbernard/ChemKED-gui',
     license='BSD 3-Clause',
     install_requires=install_requires,
