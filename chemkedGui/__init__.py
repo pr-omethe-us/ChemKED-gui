@@ -1,1 +1,0 @@
-from .chemkedGui import main
