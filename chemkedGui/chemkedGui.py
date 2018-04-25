@@ -62,9 +62,6 @@ class Contents(QWidget):
     """Provides a widget which is the contents of
     the Window class. Widget contains 3 tabs, and
     an export button below them.
-
-    Todo:
-    - Move each tab's setup to it's own function
     """
 
     def __init__(self, parent):
@@ -145,207 +142,83 @@ class Contents(QWidget):
         self.tabs = QTabWidget()
 
         # Tab Setup - File Metadata & References
-        """
-        This tab's layout is a QHBoxLayout.
-        The layout contains 2 items:
-            - Left: Metadata
-            - Right: References
-        """
         self.tab_meta = QWidget()
-        hbox_tab_meta = QHBoxLayout()  # Tab layout
+        self.hbox_tab_meta = QHBoxLayout()  # Tab layout
 
         """
-        These buttons allow the user to add and remove
-        file and reference authors.
+        The QScrollArea is necessary because the user is not limited in the number of authors they add.
+        Using a QScrollArea prevents the window from extending beyond the user's screen.
         """
-        btn_add_file_author = QPushButton('Add...')
-        btn_remFileAuthor = QPushButton('Remove...')
-        btn_add_file_author.clicked.connect(self.add_file_author)
-        btn_remFileAuthor.clicked.connect(self.remove_file_author)
-        hbox_metaBtns = QHBoxLayout()
-        hbox_metaBtns.addWidget(QLabel('Author(s)'))
-        hbox_metaBtns.addWidget(btn_add_file_author)
-        hbox_metaBtns.addWidget(btn_remFileAuthor)
-
-        btn_add_ref_author = QPushButton('Add...')
-        btn_remRefAuthor = QPushButton('Remove...')
-        btn_add_ref_author.clicked.connect(self.add_ref_author)
-        btn_remRefAuthor.clicked.connect(self.remove_ref_author)
-        hbox_refBtns = QHBoxLayout()
-        hbox_refBtns.addWidget(QLabel('Author(s)'))
-        hbox_refBtns.addWidget(btn_add_ref_author)
-        hbox_refBtns.addWidget(btn_remRefAuthor)
+        self.scroll_area_meta = QScrollArea()
+        self.scroll_area_meta.setWidgetResizable(True)
 
         """
-        The QScrollArea is necessary because the user is
-        not limited in the number of authors they add.
-        Using a QScrollArea prevents the window from extending
-        beyond the user's screen.
+        Unfortunately, it seems like QScrollAreas don't play nice with QFormLayouts. QFormLayouts that
+        require scrolling are first added to QGroupBoxes, which are then added to QScrollAreas. This allows
+        scrolling to work as intended.
         """
-        scrollAreaMeta = QScrollArea()
-        scrollAreaMeta.setWidgetResizable(True)
-
-        """
-        Unfortunately, it seems like QScrollAreas don't
-        play nice with QFormLayouts. QFormLayouts that
-        require scrolling are first added to QGroupBoxes,
-        which are then added to QScrollAreas. This works,
-        but if the QGroupBoxes can be removed, it would
-        reduce line count.
-        
-        This QFormLayout has rows pertaining to the 'Meta'
-        section of the PyKED schema.
-        """
-        groupbox_meta = QGroupBox()
+        self.groupbox_meta = QGroupBox()
         self.form_meta = QFormLayout()
 
-        self.form_meta.addRow(QLabel('File Metadata'))
-        self.form_meta.addRow(QLabel('File Version'), self.file['file-version'])
-        self.form_meta.addRow(QLabel('ChemKED Version'), self.file['chemked-version'])
-        self.form_meta.addRow(QLabel(''))
-        self.form_meta.addRow(hbox_metaBtns)
-        self.form_meta.addRow(QLabel('Name'), self.file['file-authors'][0]['name'])
-        self.form_meta.addRow(QLabel('ORCID'), self.file['file-authors'][0]['ORCID'])
+        self.groupbox_meta.setLayout(self.form_meta)
+        self.scroll_area_meta.setWidget(self.groupbox_meta)
 
-        groupbox_meta.setLayout(self.form_meta)
-        scrollAreaMeta.setWidget(groupbox_meta)
-
-        """
-        This QFormLayout has rows pertaining to the 'Reference'
-        section of the PyKED schema.
-        """
-        scrollAreaRef = QScrollArea()
-        scrollAreaRef.setWidgetResizable(True)
-        groupbox_ref = QGroupBox()
+        self.scroll_area_ref = QScrollArea()
+        self.scroll_area_ref.setWidgetResizable(True)
+        self.groupbox_ref = QGroupBox()
         self.form_ref = QFormLayout()
 
-        self.form_ref.addRow(QLabel('Reference Information'))
-        self.form_ref.addRow(QLabel('DOI'), self.file['reference']['doi'])
-        self.form_ref.addRow(QLabel('Journal'), self.file['reference']['journal'])
-        self.form_ref.addRow(QLabel('Year'), self.file['reference']['year'])
-        self.form_ref.addRow(QLabel('Volume'), self.file['reference']['volume'])
-        self.form_ref.addRow(QLabel('Pages'), self.file['reference']['pages'])
-        self.form_ref.addRow(QLabel('Detail'), self.file['reference']['detail'])
-        self.form_ref.addRow(QLabel(''))
-        self.form_ref.addRow(hbox_refBtns)
-        self.form_ref.addRow(QLabel('Name'), self.file['reference']['authors'][0]['name'])
-        self.form_ref.addRow(QLabel('ORCID'), self.file['reference']['authors'][0]['ORCID'])
+        self.groupbox_ref.setLayout(self.form_ref)
+        self.scroll_area_ref.setWidget(self.groupbox_ref)
 
-        groupbox_ref.setLayout(self.form_ref)
-        scrollAreaRef.setWidget(groupbox_ref)
+        self.hbox_tab_meta.addWidget(self.scroll_area_meta)
+        self.hbox_tab_meta.addWidget(self.scroll_area_ref)
+        self.tab_meta.setLayout(self.hbox_tab_meta)
 
-        hbox_tab_meta.addWidget(scrollAreaMeta)
-        hbox_tab_meta.addWidget(scrollAreaRef)
-        self.tab_meta.setLayout(hbox_tab_meta)
+        self.tab_meta_setup()
 
         # Tab Setup - Experiment Info. & Common Properties
-        """
-        This tab's layout is a QHBoxLayout. The
-        layout contains 2 items:
-            - Left: Experiment/Apparatus/Ignition Info.
-            - Right: Composition/Species/Common Properties
-        """
         self.tab_comp = QWidget()
-        hbox_tab_comp = QHBoxLayout()
+        self.hbox_tab_comp = QHBoxLayout()
 
-        """
-        These buttons allow the user to add and remove
-        species fields to the common properties section
-        of the tab (on the right).
-        """
+        self.form_exp = QFormLayout()
 
-        btn_add_species = QPushButton('Add...')
-        btn_remSpecies = QPushButton('Remove...')
-        btn_add_species.clicked.connect(self.add_species)
-        btn_remSpecies.clicked.connect(self.remove_species)
-        hbox_speciesBtns = QHBoxLayout()
-        hbox_speciesBtns.addWidget(QLabel('Species'))
-        hbox_speciesBtns.addWidget(btn_add_species)
-        hbox_speciesBtns.addWidget(btn_remSpecies)
+        self.scroll_area_comp = QScrollArea()
+        self.scroll_area_comp.setWidgetResizable(True)
 
-        """
-        The form_exp QFormLayout (left) contains data fields
-        corresponding to the common properties.
-        """
-        form_exp = QFormLayout()
-        form_exp.addRow(QLabel('Experiment Type'), self.file['experiment-type'])
-        form_exp.addRow(QLabel(''))
-        form_exp.addRow(QLabel('Apparatus Information'))
-        form_exp.addRow(QLabel('Kind'), self.file['apparatus']['kind'])
-        form_exp.addRow(QLabel('Institution'), self.file['apparatus']['institution'])
-        form_exp.addRow(QLabel('Facility'), self.file['apparatus']['facility'])
-        form_exp.addRow(QLabel(''))
-        form_exp.addRow(QLabel('Ignition Information'))
-        form_exp.addRow(QLabel('Target'), self.file['common-properties']['ignition-target'])
-        form_exp.addRow(QLabel('Type'), self.file['common-properties']['ignition-type'])
-
-        """
-        The form_species QFormLayout contains fields for
-        the common species. The user is able to add and
-        remove as many species as they would like.
-        """
-
-        scrollAreaComp = QScrollArea()
-        scrollAreaComp.setWidgetResizable(True)
-
-        groupbox_comp = QGroupBox()
+        self.groupbox_comp = QGroupBox()
         self.form_species = QFormLayout()
-        self.form_species.addRow(QLabel('Composition'), self.file['common-properties']['kind'])
-        self.form_species.addRow(QLabel(''))
-        self.form_species.addRow(hbox_speciesBtns)
-        self.form_species.addRow(QLabel('Species 1'))
-        self.form_species.addRow(QLabel('Name'), self.file['common-properties']['species'][0]['species-name'])
-        self.form_species.addRow(QLabel('InChI'), self.file['common-properties']['species'][0]['InChI'])
-        self.form_species.addRow(QLabel('Amount'), self.file['common-properties']['species'][0]['amount'])
 
-        groupbox_comp.setLayout(self.form_species)
-        scrollAreaComp.setWidget(groupbox_comp)
+        self.groupbox_comp.setLayout(self.form_species)
+        self.scroll_area_comp.setWidget(self.groupbox_comp)
 
-        hbox_tab_comp.addLayout(form_exp)
-        hbox_tab_comp.addWidget(scrollAreaComp)
-        self.tab_comp.setLayout(hbox_tab_comp)
+        self.hbox_tab_comp.addLayout(self.form_exp)
+        self.hbox_tab_comp.addWidget(self.scroll_area_comp)
+        self.tab_comp.setLayout(self.hbox_tab_comp)
+
+        self.tab_comp_setup()
 
         # Tab Setup - Datapoint-Specific Info
         self.tab_data = QWidget()
 
-        """
-        The datapoints tab uses a QVBoxLayout, which contains 2 items:
-            - Top: A QHBoxLayout containing:
-                - The Add Datapoint Button
-                - The Remove Datapoint Button
-            - Bottom: A QFormLayout for datapoints
-        """
-        vbox_tab_data = QVBoxLayout()
+        self.vbox_tab_data = QVBoxLayout()
+        self.hbox_tab_data = QHBoxLayout()
 
-        """
-        These buttons allow the user to add/remove datapoint fields.
-        """
-        btn_add_datapoint = QPushButton('Add...')
-        btn_add_datapoint.clicked.connect(self.add_datapoint)
-        btn_remDataPoint = QPushButton('Remove...')
-        btn_remDataPoint.clicked.connect(self.remove_datapoint)
-        hbox_tab_data = QHBoxLayout()
-        hbox_tab_data.addWidget(btn_add_datapoint)
-        hbox_tab_data.addWidget(btn_remDataPoint)
+        self.scroll_area_data = QScrollArea()
+        self.scroll_area_data.setWidgetResizable(True)
 
-        scrollAreaData = QScrollArea()
-        scrollAreaData.setWidgetResizable(True)
-
-        groupbox_data = QGroupBox()
+        self.groupbox_data = QGroupBox()
         self.form_data = QFormLayout()
-        self.form_data.addRow(QLabel('Datapoint 1'))
-        self.form_data.addRow(QLabel('Temperature'), self.file['datapoints'][0]['temperature'])
-        self.form_data.addRow(QLabel('Pressure'), self.file['datapoints'][0]['pressure'])
-        self.form_data.addRow(QLabel('Ignition Delay'), self.file['datapoints'][0]['ignition-delay'])
-        self.form_data.addRow(QLabel('Equivalence Ratio'), self.file['datapoints'][0]['equivalence-ratio'])
 
-        groupbox_data.setLayout(self.form_data)
-        scrollAreaData.setWidget(groupbox_data)
-        vbox_tab_data.addLayout(hbox_tab_data)
-        vbox_tab_data.addWidget(QLabel('Inputs should be [Number][Space][Unit] (e.g. 1500 K).'))
-        vbox_tab_data.addWidget(scrollAreaData)
+        self.groupbox_data.setLayout(self.form_data)
+        self.scroll_area_data.setWidget(self.groupbox_data)
+        self.vbox_tab_data.addLayout(self.hbox_tab_data)
+        self.vbox_tab_data.addWidget(QLabel('Inputs should be [Number][Space][Unit] (e.g. 1500 K).'))
+        self.vbox_tab_data.addWidget(self.scroll_area_data)
 
-        self.tab_data.setLayout(vbox_tab_data)
+        self.tab_data.setLayout(self.vbox_tab_data)
+
+        self.tab_data_setup()
 
         # Export Button
 
@@ -356,6 +229,107 @@ class Contents(QWidget):
         layout.addWidget(self.tabs)
         layout.addWidget(btn_export)
         self.setLayout(layout)
+
+    def tab_meta_setup(self):
+        """Sets up the tab corresponding to the Meta and
+        Reference sections of the PyKED schema."""
+        btn_add_file_author = QPushButton('Add...')
+        btn_add_file_author.clicked.connect(self.add_file_author)
+        btn_rem_file_author = QPushButton('Remove...')
+        btn_rem_file_author.clicked.connect(self.remove_file_author)
+        hbox_meta_btns = QHBoxLayout()
+        hbox_meta_btns.addWidget(QLabel('Author(s)'))
+        hbox_meta_btns.addWidget(btn_add_file_author)
+        hbox_meta_btns.addWidget(btn_rem_file_author)
+
+        btn_add_ref_author = QPushButton('Add...')
+        btn_add_ref_author.clicked.connect(self.add_ref_author)
+        btn_rem_ref_author = QPushButton('Remove...')
+        btn_rem_ref_author.clicked.connect(self.remove_ref_author)
+        hbox_ref_btns = QHBoxLayout()
+        hbox_ref_btns.addWidget(QLabel('Author(s)'))
+        hbox_ref_btns.addWidget(btn_add_ref_author)
+        hbox_ref_btns.addWidget(btn_rem_ref_author)
+
+        """This section corresponds to the Meta section of the PyKED schema.
+        """
+        self.form_meta.addRow(QLabel('File Metadata'))
+        self.form_meta.addRow(QLabel('File Version'), self.file['file-version'])
+        self.form_meta.addRow(QLabel('ChemKED Version'), self.file['chemked-version'])
+        self.form_meta.addRow(QLabel(''))
+        self.form_meta.addRow(hbox_meta_btns)
+        self.form_meta.addRow(QLabel('Name'), self.file['file-authors'][0]['name'])
+        self.form_meta.addRow(QLabel('ORCID'), self.file['file-authors'][0]['ORCID'])
+
+        """This section corresponds to the Reference section of the PyKED schema.
+        """
+        self.form_ref.addRow(QLabel('Reference Information'))
+        self.form_ref.addRow(QLabel('DOI'), self.file['reference']['doi'])
+        self.form_ref.addRow(QLabel('Journal'), self.file['reference']['journal'])
+        self.form_ref.addRow(QLabel('Year'), self.file['reference']['year'])
+        self.form_ref.addRow(QLabel('Volume'), self.file['reference']['volume'])
+        self.form_ref.addRow(QLabel('Pages'), self.file['reference']['pages'])
+        self.form_ref.addRow(QLabel('Detail'), self.file['reference']['detail'])
+        self.form_ref.addRow(QLabel(''))
+        self.form_ref.addRow(hbox_ref_btns)
+        self.form_ref.addRow(QLabel('Name'), self.file['reference']['authors'][0]['name'])
+        self.form_ref.addRow(QLabel('ORCID'), self.file['reference']['authors'][0]['ORCID'])
+
+    def tab_comp_setup(self):
+        """Sets up the tab corresponding to the Common Properties section
+        of the PyKED schema.
+        """
+        btn_add_species = QPushButton('Add...')
+        btn_add_species.clicked.connect(self.add_species)
+        btn_rem_species = QPushButton('Remove...')
+        btn_rem_species.clicked.connect(self.remove_species)
+        hbox_species_btns = QHBoxLayout()
+        hbox_species_btns.addWidget(QLabel('Species'))
+        hbox_species_btns.addWidget(btn_add_species)
+        hbox_species_btns.addWidget(btn_rem_species)
+
+        """This section allows the user to dictate the type of experiment they have conducted.
+        """
+        self.form_exp.addRow(QLabel('Experiment Type'), self.file['experiment-type'])
+        self.form_exp.addRow(QLabel(''))
+        self.form_exp.addRow(QLabel('Apparatus Information'))
+        self.form_exp.addRow(QLabel('Kind'), self.file['apparatus']['kind'])
+        self.form_exp.addRow(QLabel('Institution'), self.file['apparatus']['institution'])
+        self.form_exp.addRow(QLabel('Facility'), self.file['apparatus']['facility'])
+        self.form_exp.addRow(QLabel(''))
+        self.form_exp.addRow(QLabel('Ignition Information'))
+        self.form_exp.addRow(QLabel('Target'), self.file['common-properties']['ignition-target'])
+        self.form_exp.addRow(QLabel('Type'), self.file['common-properties']['ignition-type'])
+
+        """This section allows the user to add and remove species which are recorded later under
+        each datapoint.
+        """
+        self.form_species.addRow(QLabel('Composition'), self.file['common-properties']['kind'])
+        self.form_species.addRow(QLabel(''))
+        self.form_species.addRow(hbox_species_btns)
+        self.form_species.addRow(QLabel('Species 1'))
+        self.form_species.addRow(QLabel('Name'), self.file['common-properties']['species'][0]['species-name'])
+        self.form_species.addRow(QLabel('InChI'), self.file['common-properties']['species'][0]['InChI'])
+        self.form_species.addRow(QLabel('Amount'), self.file['common-properties']['species'][0]['amount'])
+
+    def tab_data_setup(self):
+        """Sets up the tab that creates specific datapoints.
+        """
+        btn_add_datapoint = QPushButton('Add...')
+        btn_add_datapoint.clicked.connect(self.add_datapoint)
+        btn_rem_datapoint = QPushButton('Remove...')
+        btn_rem_datapoint.clicked.connect(self.remove_datapoint)
+        self.hbox_tab_data.addWidget(btn_add_datapoint)
+        self.hbox_tab_data.addWidget(btn_rem_datapoint)
+
+        """Adds specific data fields to the Datapoints tab.
+        """
+        # TODO: Allow the user to dictate which fields they want available.
+        self.form_data.addRow(QLabel('Datapoint 1'))
+        self.form_data.addRow(QLabel('Temperature'), self.file['datapoints'][0]['temperature'])
+        self.form_data.addRow(QLabel('Pressure'), self.file['datapoints'][0]['pressure'])
+        self.form_data.addRow(QLabel('Ignition Delay'), self.file['datapoints'][0]['ignition-delay'])
+        self.form_data.addRow(QLabel('Equivalence Ratio'), self.file['datapoints'][0]['equivalence-ratio'])
 
     def add_file_author(self):
         self.file['file-authors'].append(
@@ -458,8 +432,7 @@ class Contents(QWidget):
         a YAML file in the ChemKED format.
         """
 
-        save_location = self.fileDialog()
-        # if save_location[0] != '':
+        save_location = self.file_dialog()
         datapoints = []
         atts = ['temperature', 'pressure', 'ignition-delay', 'equivalence-ratio']
         for i in range(len(self.file['datapoints'])):
@@ -519,8 +492,7 @@ class Contents(QWidget):
             exported = chemked.ChemKED(dict_input=exported_file, skip_validation=True)
             exported.write_file(save_location, overwrite=True)
         except (ValueError, KeyError) as e:
-            QMessageBox.about(self, 'Error',
-                              str(e))
+            QMessageBox.about(self, 'Error', str(e))
             print('Error making a ChemKED object with input data.')
         except Exception as e:
             print('Generic error', str(e))
