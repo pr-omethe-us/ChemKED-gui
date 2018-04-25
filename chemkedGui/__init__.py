@@ -1,3 +1,1 @@
-from chemkedGui import chemkedGui
-
-chemkedGui.main()
+from .chemkedGui import main

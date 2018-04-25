@@ -27,5 +27,9 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Topic :: Scientific/Engineering :: Chemistry',
     ],
-
+    entry_points={
+        'console_scripts': [
+            'chemked=chemkedGui:main'
+        ],
+    },
 )

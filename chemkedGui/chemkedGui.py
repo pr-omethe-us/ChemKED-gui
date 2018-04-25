@@ -444,10 +444,10 @@ class Contents(QWidget):
         else:
             pass
 
-    def fileDialog(self):
+    def file_dialog(self):
         save_location = QFileDialog.getSaveFileName(self, 'Export File', os.getenv('HOME'), 'YAML (*.yaml)')
         if save_location:
-            return save_location
+            return save_location[0]
         else:
             return ''
 
@@ -459,68 +459,71 @@ class Contents(QWidget):
         """
 
         save_location = self.fileDialog()
-        if save_location[0] != '':
-            datapoints = []
-            atts = ['temperature', 'pressure', 'ignition-delay', 'equivalence-ratio']
-            for i in range(len(self.file['datapoints'])):
-                datapoints.append({})
-                for att in atts:
-                    datapoints[i][att] = [self.file['datapoints'][i][att].text()]
-                datapoints[i]['composition'] = {}
-                datapoints[i]['composition']['species'] = []
-                for j in range(len(self.file['common-properties']['species'])):
-                    datapoints[i]['composition']['species'].append({})
-                    datapoints[i]['composition']['species'][j]['species-name'] = \
-                        self.file['common-properties']['species'][j]['species-name'].text()
-                    datapoints[i]['composition']['species'][j]['InChI'] = \
-                        self.file['common-properties']['species'][j]['InChI'].text()
-                    datapoints[i]['composition']['species'][j]['amount'] = \
-                        [self.file['common-properties']['species'][j]['amount'].text()]
-                datapoints[i]['composition']['kind'] = self.file['common-properties']['kind'].currentText()
-                datapoints[i]['composition']['ignition-type'] = {
-                    'target': self.file['common-properties']['ignition-target'].currentText(),
-                    'type': self.file['common-properties']['ignition-type'].currentText()
-                }
-            file_authors = [
-                {'name': author['name'].text(), 'ORCID': author['ORCID'].text()} for author in self.file['file-authors']
-            ]
-            for author in file_authors:
-                if author['ORCID'] == '':
-                    del author['ORCID']
-            ref_authors = [{'name': author['name'].text(), 'ORCID': author['ORCID'].text()} for author in
-                           self.file['reference']['authors']]
-            for author in ref_authors:
-                if author['ORCID'] == '':
-                    del author['ORCID']
-
-            exported_file = {
-                'file-version': self.file['file-version'].text(),
-                'chemked-version': self.file['chemked-version'].text(),
-                'file-authors': file_authors,
-                'experiment-type': self.file['experiment-type'].currentText(),
-                'reference': {
-                    'doi': self.file['reference']['doi'].text(),
-                    'authors': ref_authors,
-                    'journal': self.file['reference']['journal'].text(),
-                    'year': self.file['reference']['year'].text(),
-                    'volume': self.file['reference']['volume'].text(),
-                    'pages': self.file['reference']['pages'].text(),
-                    'detail': self.file['reference']['detail'].text()
-                },
-                'apparatus': {
-                    'kind': self.file['apparatus']['kind'].currentText(),
-                    'institution': self.file['apparatus']['institution'].text(),
-                    'facility': self.file['apparatus']['facility'].text(),
-                },
-                'datapoints': datapoints
+        # if save_location[0] != '':
+        datapoints = []
+        atts = ['temperature', 'pressure', 'ignition-delay', 'equivalence-ratio']
+        for i in range(len(self.file['datapoints'])):
+            datapoints.append({})
+            for att in atts:
+                datapoints[i][att] = [self.file['datapoints'][i][att].text()]
+            datapoints[i]['composition'] = {}
+            datapoints[i]['composition']['species'] = []
+            for j in range(len(self.file['common-properties']['species'])):
+                datapoints[i]['composition']['species'].append({})
+                datapoints[i]['composition']['species'][j]['species-name'] = \
+                    self.file['common-properties']['species'][j]['species-name'].text()
+                datapoints[i]['composition']['species'][j]['InChI'] = \
+                    self.file['common-properties']['species'][j]['InChI'].text()
+                datapoints[i]['composition']['species'][j]['amount'] = \
+                    [self.file['common-properties']['species'][j]['amount'].text()]
+            datapoints[i]['composition']['kind'] = self.file['common-properties']['kind'].currentText()
+            datapoints[i]['composition']['ignition-type'] = {
+                'target': self.file['common-properties']['ignition-target'].currentText(),
+                'type': self.file['common-properties']['ignition-type'].currentText()
             }
+        file_authors = [
+            {'name': author['name'].text(), 'ORCID': author['ORCID'].text()} for author in self.file['file-authors']
+        ]
+        for author in file_authors:
+            if author['ORCID'] == '':
+                del author['ORCID']
+        ref_authors = [{'name': author['name'].text(), 'ORCID': author['ORCID'].text()} for author in
+                       self.file['reference']['authors']]
+        for author in ref_authors:
+            if author['ORCID'] == '':
+                del author['ORCID']
 
-            try:
-                exported = chemked.ChemKED(dict_input=exported_file, skip_validation=True)
-                exported.write_file(save_location[0], overwrite=True)
-            except:
-                QMessageBox.about(self, 'Error', "Can't export to ChemKED. Make sure all data and units are input correctly.")
-                print('Error making a ChemKED object with input data.')
+        exported_file = {
+            'file-version': self.file['file-version'].text(),
+            'chemked-version': self.file['chemked-version'].text(),
+            'file-authors': file_authors,
+            'experiment-type': self.file['experiment-type'].currentText(),
+            'reference': {
+                'doi': self.file['reference']['doi'].text(),
+                'authors': ref_authors,
+                'journal': self.file['reference']['journal'].text(),
+                'year': self.file['reference']['year'].text(),
+                'volume': self.file['reference']['volume'].text(),
+                'pages': self.file['reference']['pages'].text(),
+                'detail': self.file['reference']['detail'].text()
+            },
+            'apparatus': {
+                'kind': self.file['apparatus']['kind'].currentText(),
+                'institution': self.file['apparatus']['institution'].text(),
+                'facility': self.file['apparatus']['facility'].text(),
+            },
+            'datapoints': datapoints
+        }
+
+        try:
+            exported = chemked.ChemKED(dict_input=exported_file, skip_validation=True)
+            exported.write_file(save_location, overwrite=True)
+        except (ValueError, KeyError) as e:
+            QMessageBox.about(self, 'Error',
+                              str(e))
+            print('Error making a ChemKED object with input data.')
+        except Exception as e:
+            print('Generic error', str(e))
 
 
 def main():
