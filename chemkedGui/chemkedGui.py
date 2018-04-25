@@ -25,7 +25,7 @@ class Window(QMainWindow):
         self.setGeometry(self.left, self.top, self.width, self.height)
         self.setWindowIcon(QIcon('pyked-logo.png'))
 
-        self.setWindowContents()
+        self.set_window_contents()
 
         self.center()
 
@@ -33,7 +33,7 @@ class Window(QMainWindow):
         close_gui.setShortcut('Ctrl+Q')
         close_gui.triggered.connect(self.closeEvent)
 
-    def setWindowContents(self):
+    def set_window_contents(self):
         contents = Contents(self)
         self.setCentralWidget(contents)
 
@@ -158,22 +158,22 @@ class Contents(QWidget):
         These buttons allow the user to add and remove
         file and reference authors.
         """
-        btn_addFileAuthor = QPushButton('Add...')
+        btn_add_file_author = QPushButton('Add...')
         btn_remFileAuthor = QPushButton('Remove...')
-        btn_addFileAuthor.clicked.connect(self.addFileAuthor)
-        btn_remFileAuthor.clicked.connect(self.removeFileAuthor)
+        btn_add_file_author.clicked.connect(self.add_file_author)
+        btn_remFileAuthor.clicked.connect(self.remove_file_author)
         hbox_metaBtns = QHBoxLayout()
         hbox_metaBtns.addWidget(QLabel('Author(s)'))
-        hbox_metaBtns.addWidget(btn_addFileAuthor)
+        hbox_metaBtns.addWidget(btn_add_file_author)
         hbox_metaBtns.addWidget(btn_remFileAuthor)
 
-        btn_addRefAuthor = QPushButton('Add...')
+        btn_add_ref_author = QPushButton('Add...')
         btn_remRefAuthor = QPushButton('Remove...')
-        btn_addRefAuthor.clicked.connect(self.addRefAuthor)
-        btn_remRefAuthor.clicked.connect(self.removeRefAuthor)
+        btn_add_ref_author.clicked.connect(self.add_ref_author)
+        btn_remRefAuthor.clicked.connect(self.remove_ref_author)
         hbox_refBtns = QHBoxLayout()
         hbox_refBtns.addWidget(QLabel('Author(s)'))
-        hbox_refBtns.addWidget(btn_addRefAuthor)
+        hbox_refBtns.addWidget(btn_add_ref_author)
         hbox_refBtns.addWidget(btn_remRefAuthor)
 
         """
@@ -254,13 +254,13 @@ class Contents(QWidget):
         of the tab (on the right).
         """
 
-        btn_addSpecies = QPushButton('Add...')
+        btn_add_species = QPushButton('Add...')
         btn_remSpecies = QPushButton('Remove...')
-        btn_addSpecies.clicked.connect(self.addSpecies)
-        btn_remSpecies.clicked.connect(self.removeSpecies)
+        btn_add_species.clicked.connect(self.add_species)
+        btn_remSpecies.clicked.connect(self.remove_species)
         hbox_speciesBtns = QHBoxLayout()
         hbox_speciesBtns.addWidget(QLabel('Species'))
-        hbox_speciesBtns.addWidget(btn_addSpecies)
+        hbox_speciesBtns.addWidget(btn_add_species)
         hbox_speciesBtns.addWidget(btn_remSpecies)
 
         """
@@ -320,12 +320,12 @@ class Contents(QWidget):
         """
         These buttons allow the user to add/remove datapoint fields.
         """
-        btn_addDataPoint = QPushButton('Add...')
-        btn_addDataPoint.clicked.connect(self.addDatapoint)
+        btn_add_datapoint = QPushButton('Add...')
+        btn_add_datapoint.clicked.connect(self.add_datapoint)
         btn_remDataPoint = QPushButton('Remove...')
-        btn_remDataPoint.clicked.connect(self.removeDatapoint)
+        btn_remDataPoint.clicked.connect(self.remove_datapoint)
         hbox_tab_data = QHBoxLayout()
-        hbox_tab_data.addWidget(btn_addDataPoint)
+        hbox_tab_data.addWidget(btn_add_datapoint)
         hbox_tab_data.addWidget(btn_remDataPoint)
 
         scrollAreaData = QScrollArea()
@@ -357,7 +357,7 @@ class Contents(QWidget):
         layout.addWidget(btn_export)
         self.setLayout(layout)
 
-    def addFileAuthor(self):
+    def add_file_author(self):
         self.file['file-authors'].append(
             {'name': QLineEdit(),
              'ORCID': QLineEdit()}
@@ -365,7 +365,7 @@ class Contents(QWidget):
         self.form_meta.addRow(QLabel('Name'), self.file['file-authors'][-1]['name'])
         self.form_meta.addRow(QLabel('ORCID'), self.file['file-authors'][-1]['ORCID'])
 
-    def addRefAuthor(self):
+    def add_ref_author(self):
         self.file['reference']['authors'].append(
             {'name': QLineEdit(),
              'ORCID': QLineEdit()}
@@ -373,7 +373,7 @@ class Contents(QWidget):
         self.form_ref.addRow(QLabel('Name'), self.file['reference']['authors'][-1]['name'])
         self.form_ref.addRow(QLabel('ORCID'), self.file['reference']['authors'][-1]['ORCID'])
 
-    def addSpecies(self):
+    def add_species(self):
         new_species = {
             'species-name': QLineEdit(),
             'InChI': QLineEdit(),
@@ -386,7 +386,7 @@ class Contents(QWidget):
         self.form_species.addRow(QLabel('InChI'), self.file['common-properties']['species'][-1]['InChI'])
         self.form_species.addRow(QLabel('Amount'), self.file['common-properties']['species'][-1]['amount'])
 
-    def addDatapoint(self):
+    def add_datapoint(self):
         new_datapoint = {
             'temperature': QLineEdit(),
             'pressure': QLineEdit(),
@@ -401,7 +401,7 @@ class Contents(QWidget):
         self.form_data.addRow(QLabel('Ignition Delay'), self.file['datapoints'][-1]['ignition-delay'])
         self.form_data.addRow(QLabel('Equivalence Ratio'), self.file['datapoints'][-1]['equivalence-ratio'])
 
-    def removeFileAuthor(self):
+    def remove_file_author(self):
         j = self.form_meta.rowCount() - 1
         if len(self.file['file-authors']) > 1:
             self.form_meta.removeRow(j)
@@ -410,7 +410,7 @@ class Contents(QWidget):
         else:
             pass
 
-    def removeRefAuthor(self):
+    def remove_ref_author(self):
         j = self.form_ref.rowCount() - 1
         if len(self.file['reference']['authors']) > 1:
             self.form_ref.removeRow(j)
@@ -419,7 +419,7 @@ class Contents(QWidget):
         else:
             pass
 
-    def removeSpecies(self):
+    def remove_species(self):
         j = self.form_species.rowCount() - 1
         if len(self.file['common-properties']['species']) > 1:
             # Todo: make this a for loop
@@ -431,7 +431,7 @@ class Contents(QWidget):
         else:
             pass
 
-    def removeDatapoint(self):
+    def remove_datapoint(self):
         j = self.form_data.rowCount() - 1
         if len(self.file['datapoints']) > 1:
             # Todo: make this a for loop
