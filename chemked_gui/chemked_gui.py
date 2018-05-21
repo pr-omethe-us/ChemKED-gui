@@ -337,7 +337,6 @@ class Contents(QWidget):
         )
         self.form_meta.addRow(QLabel('Name'), self.file['file-authors'][-1]['name'])
         self.form_meta.addRow(QLabel('ORCID'), self.file['file-authors'][-1]['ORCID'])
-        self.update()
 
     def add_ref_author(self):
         self.file['reference']['authors'].append(
@@ -346,7 +345,6 @@ class Contents(QWidget):
         )
         self.form_ref.addRow(QLabel('Name'), self.file['reference']['authors'][-1]['name'])
         self.form_ref.addRow(QLabel('ORCID'), self.file['reference']['authors'][-1]['ORCID'])
-        self.update()
 
     def add_species(self):
         new_species = {
@@ -360,7 +358,6 @@ class Contents(QWidget):
         self.form_species.addRow(QLabel('Name'), self.file['common-properties']['species'][-1]['species-name'])
         self.form_species.addRow(QLabel('InChI'), self.file['common-properties']['species'][-1]['InChI'])
         self.form_species.addRow(QLabel('Amount'), self.file['common-properties']['species'][-1]['amount'])
-        self.update()
 
     def add_datapoint(self):
         new_datapoint = {
@@ -376,7 +373,6 @@ class Contents(QWidget):
         self.form_data.addRow(QLabel('Pressure'), self.file['datapoints'][-1]['pressure'])
         self.form_data.addRow(QLabel('Ignition Delay'), self.file['datapoints'][-1]['ignition-delay'])
         self.form_data.addRow(QLabel('Equivalence Ratio'), self.file['datapoints'][-1]['equivalence-ratio'])
-        self.update()
 
     def remove_file_author(self):
         j = self.form_meta.rowCount() - 1
@@ -384,8 +380,6 @@ class Contents(QWidget):
             self.form_meta.removeRow(j)
             self.form_meta.removeRow(j-1)
             del self.file['file-authors'][-1]
-            self.update()
-
         else:
             pass
 
@@ -395,8 +389,6 @@ class Contents(QWidget):
             self.form_ref.removeRow(j)
             self.form_ref.removeRow(j-1)
             del self.file['reference']['authors'][-1]
-            self.update()
-
         else:
             pass
 
@@ -409,7 +401,6 @@ class Contents(QWidget):
             self.form_species.removeRow(j-2)
             self.form_species.removeRow(j-3)
             del self.file['common-properties']['species'][-1]
-            self.update()
         else:
             pass
 
@@ -423,8 +414,6 @@ class Contents(QWidget):
             self.form_data.removeRow(j-3)
             self.form_data.removeRow(j-4)
             del self.file['datapoints'][-1]
-            self.update()
-
         else:
             pass
 
