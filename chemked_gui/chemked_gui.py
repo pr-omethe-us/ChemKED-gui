@@ -395,11 +395,8 @@ class Contents(QWidget):
     def remove_species(self):
         j = self.form_species.rowCount() - 1
         if len(self.file['common-properties']['species']) > 1:
-            # Todo: make this a for loop
-            self.form_species.removeRow(j)
-            self.form_species.removeRow(j-1)
-            self.form_species.removeRow(j-2)
-            self.form_species.removeRow(j-3)
+            for i in range(4):
+                self.form_species.removeRow(j-i)
             del self.file['common-properties']['species'][-1]
         else:
             pass
@@ -407,12 +404,8 @@ class Contents(QWidget):
     def remove_datapoint(self):
         j = self.form_data.rowCount() - 1
         if len(self.file['datapoints']) > 1:
-            # Todo: make this a for loop
-            self.form_data.removeRow(j)
-            self.form_data.removeRow(j-1)
-            self.form_data.removeRow(j-2)
-            self.form_data.removeRow(j-3)
-            self.form_data.removeRow(j-4)
+            for i in range(5):
+                self.form_data.removeRow(j-i)
             del self.file['datapoints'][-1]
         else:
             pass
@@ -437,7 +430,10 @@ class Contents(QWidget):
         for i in range(len(self.file['datapoints'])):
             datapoints.append({})
             for att in atts:
-                datapoints[i][att] = [self.file['datapoints'][i][att].text()]
+                if att == 'equivalence-ratio':
+                    datapoints[i][att] = float(self.file['datapoints'][i][att].text())
+                else:
+                    datapoints[i][att] = [self.file['datapoints'][i][att].text()]
             datapoints[i]['composition'] = {}
             datapoints[i]['composition']['species'] = []
             for j in range(len(self.file['common-properties']['species'])):
@@ -447,9 +443,9 @@ class Contents(QWidget):
                 datapoints[i]['composition']['species'][j]['InChI'] = \
                     self.file['common-properties']['species'][j]['InChI'].text()
                 datapoints[i]['composition']['species'][j]['amount'] = \
-                    [self.file['common-properties']['species'][j]['amount'].text()]
+                    [float(self.file['common-properties']['species'][j]['amount'].text())]
             datapoints[i]['composition']['kind'] = self.file['common-properties']['kind'].currentText()
-            datapoints[i]['composition']['ignition-type'] = {
+            datapoints[i]['ignition-type'] = {
                 'target': self.file['common-properties']['ignition-target'].currentText(),
                 'type': self.file['common-properties']['ignition-type'].currentText()
             }
@@ -466,7 +462,7 @@ class Contents(QWidget):
                 del author['ORCID']
 
         exported_file = {
-            'file-version': self.file['file-version'].text(),
+            'file-version': int(self.file['file-version'].text()),
             'chemked-version': self.file['chemked-version'].text(),
             'file-authors': file_authors,
             'experiment-type': self.file['experiment-type'].currentText(),
@@ -474,8 +470,8 @@ class Contents(QWidget):
                 'doi': self.file['reference']['doi'].text(),
                 'authors': ref_authors,
                 'journal': self.file['reference']['journal'].text(),
-                'year': self.file['reference']['year'].text(),
-                'volume': self.file['reference']['volume'].text(),
+                'year': int(self.file['reference']['year'].text()),
+                'volume': int(self.file['reference']['volume'].text()),
                 'pages': self.file['reference']['pages'].text(),
                 'detail': self.file['reference']['detail'].text()
             },
