@@ -1,5 +1,6 @@
 ## 0.1.4 2018/06/04
 - ChemKED files are now validated upon export
+- Fixes faulty Cerberus version installation
 
 ## 0.1.3 2018/04/27
 - `int` values in exported files are no longer listed as `str`
