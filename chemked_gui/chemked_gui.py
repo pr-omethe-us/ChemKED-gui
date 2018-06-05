@@ -484,7 +484,7 @@ class Contents(QWidget):
         }
 
         try:
-            exported = chemked.ChemKED(dict_input=exported_file, skip_validation=True)
+            exported = chemked.ChemKED(dict_input=exported_file, skip_validation=False)
             exported.write_file(save_location, overwrite=True)
         except (ValueError, KeyError) as e:
             QMessageBox.about(self, 'Error', str(e))
