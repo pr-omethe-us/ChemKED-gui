@@ -2,14 +2,15 @@ from setuptools import setup
 
 long_description = "A Graphical User Interface for generating ChemKED files."
 
-install_requires = ['pyked>=0.4.0',
-                    'PyQt5>=5.10.1']
+install_requires = ['Cerberus>=1.0.0,<1.2',
+                    'pyked>=0.4.0',
+                    'PyQt5>=5.10.1',]
 
 python_requires = '>=3.5'
 
 setup(
     name='chemked_gui',
-    version='0.1.3',
+    version='0.1.4',
     url='https://github.com/mdbernard/ChemKED-gui',
     license='BSD 3-Clause',
     install_requires=install_requires,

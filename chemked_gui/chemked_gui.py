@@ -23,7 +23,7 @@ class Window(QMainWindow):
         self.height = 600
         self.setWindowTitle(title)
         self.setGeometry(self.left, self.top, self.width, self.height)
-        self.setWindowIcon(QIcon('pyked-logo.png'))
+        self.setWindowIcon(QIcon('logo.png'))
 
         self.set_window_contents()
 
@@ -67,9 +67,10 @@ class Contents(QWidget):
     def __init__(self, parent):
         super(QWidget, self).__init__(parent)
 
-        # This is the exported dictionary
+        # This is the skeleton of the exported dictionary
+        # User adds more fields to expandable parts in GUI
         self.file = {
-            'file-authors': [
+            'file-authors': [  # Expandable
                 {'name': QLineEdit(),
                  'ORCID': QLineEdit()}
             ],
@@ -77,7 +78,7 @@ class Contents(QWidget):
             'chemked-version': QLineEdit(__version__),
             'reference': {
                 'doi': QLineEdit(),
-                'authors': [
+                'authors': [  # Expandable
                     {'name': QLineEdit(),
                      'ORCID': QLineEdit()}
                 ],
@@ -93,7 +94,7 @@ class Contents(QWidget):
                 'institution': QLineEdit(),
                 'facility': QLineEdit()
             },
-            'datapoints': [
+            'datapoints': [  # Expandable
                 {
                     'temperature': QLineEdit(),
                     'pressure': QLineEdit(),
@@ -102,7 +103,7 @@ class Contents(QWidget):
                 }
             ],
             'common-properties': {
-                'species': [
+                'species': [  # Expandable
                     {'species-name': QLineEdit(),
                      'InChI': QLineEdit(),
                      'amount': QLineEdit()}
@@ -484,7 +485,7 @@ class Contents(QWidget):
         }
 
         try:
-            exported = chemked.ChemKED(dict_input=exported_file, skip_validation=True)
+            exported = chemked.ChemKED(dict_input=exported_file, skip_validation=False)
             exported.write_file(save_location, overwrite=True)
         except (ValueError, KeyError) as e:
             QMessageBox.about(self, 'Error', str(e))
